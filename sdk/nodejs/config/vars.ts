@@ -2,21 +2,121 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "../types/input";
-import * as outputs from "../types/output";
-import * as enums from "../types/enums";
 import * as utilities from "../utilities";
 
 declare var exports: any;
-const __config = new pulumi.Config("xyz");
+const __config = new pulumi.Config("foreman");
 
 /**
- * A region which should be used.
+ * Whether or not the client should try to authenticate through the HTTP negotiate mechanism. Defaults to `false`.
  */
-export declare const region: enums.region.Region | undefined;
-Object.defineProperty(exports, "region", {
+export declare const clientAuthNegotiate: boolean | undefined;
+Object.defineProperty(exports, "clientAuthNegotiate", {
     get() {
-        return __config.getObject<enums.region.Region>("region");
+        return __config.getObject<boolean>("clientAuthNegotiate");
+    },
+    enumerable: true,
+});
+
+/**
+ * The username to authenticate against Foreman. This can also be set through the environment variable
+ * `FOREMAN_CLIENT_PASSWORD`. Defaults to `""`.
+ */
+export declare const clientPassword: string | undefined;
+Object.defineProperty(exports, "clientPassword", {
+    get() {
+        return __config.get("clientPassword");
+    },
+    enumerable: true,
+});
+
+/**
+ * Whether or not to verify the server's certificate. Defaults to `false`.
+ */
+export declare const clientTlsInsecure: boolean | undefined;
+Object.defineProperty(exports, "clientTlsInsecure", {
+    get() {
+        return __config.getObject<boolean>("clientTlsInsecure");
+    },
+    enumerable: true,
+});
+
+/**
+ * The username to authenticate against Foreman. This can also be set through the environment variable
+ * `FOREMAN_CLIENT_USERNAME`. Defaults to `""`.
+ */
+export declare const clientUsername: string | undefined;
+Object.defineProperty(exports, "clientUsername", {
+    get() {
+        return __config.get("clientUsername");
+    },
+    enumerable: true,
+});
+
+/**
+ * The location for all resources requested and created by the providerDefaults to "0". Set organizationId and locationId
+ * to a value < 0 if you need to disable Locations and Organizations on Foreman older than 1.21
+ */
+export declare const locationId: number | undefined;
+Object.defineProperty(exports, "locationId", {
+    get() {
+        return __config.getObject<number>("locationId");
+    },
+    enumerable: true,
+});
+
+/**
+ * The organization for all resource requested and created by the Provider Defaults to "0". Set organizationId and
+ * locationId to a value < 0 if you need to disable Locations and Organizations on Foreman older than 1.21
+ */
+export declare const organizationId: number | undefined;
+Object.defineProperty(exports, "organizationId", {
+    get() {
+        return __config.getObject<number>("organizationId");
+    },
+    enumerable: true,
+});
+
+export declare const providerLogfile: string | undefined;
+Object.defineProperty(exports, "providerLogfile", {
+    get() {
+        return __config.get("providerLogfile");
+    },
+    enumerable: true,
+});
+
+/**
+ * The level of verbosity for the provider's log file. This setting determines which types of log messages are written and
+ * which are ignored. Possible values (from most verbose to least verbose) include 'DEBUG', 'TRACE', 'INFO', 'WARNING',
+ * 'ERROR', and 'NONE'. The provider's logs will be written to the location specified by `providerLogfile`. This can also
+ * be set through the environment variable `FOREMAN_PROVIDER_LOGLEVEL`. Defaults to `'INFO'`.
+ */
+export declare const providerLoglevel: string | undefined;
+Object.defineProperty(exports, "providerLoglevel", {
+    get() {
+        return __config.get("providerLoglevel");
+    },
+    enumerable: true,
+});
+
+/**
+ * The hostname / IP address of the Foreman REST API server
+ */
+export declare const serverHostname: string | undefined;
+Object.defineProperty(exports, "serverHostname", {
+    get() {
+        return __config.get("serverHostname");
+    },
+    enumerable: true,
+});
+
+/**
+ * The protocol the Foreman REST API server is using for communication. Defaults to `"https"`.
+ */
+export declare const serverProtocol: string | undefined;
+Object.defineProperty(exports, "serverProtocol", {
+    get() {
+        return __config.get("serverProtocol");
     },
     enumerable: true,
 });
