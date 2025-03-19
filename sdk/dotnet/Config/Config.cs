@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Foreman
 {
     public static class Config
     {
@@ -30,16 +30,110 @@ namespace Pulumi.Xyz
             }
         }
 
-        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("xyz");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("foreman");
 
-        private static readonly __Value<Pulumi.Xyz.Region.Region?> _region = new __Value<Pulumi.Xyz.Region.Region?>(() => __config.GetObject<Pulumi.Xyz.Region.Region>("region"));
+        private static readonly __Value<bool?> _clientAuthNegotiate = new __Value<bool?>(() => __config.GetBoolean("clientAuthNegotiate"));
         /// <summary>
-        /// A region which should be used.
+        /// Whether or not the client should try to authenticate through the HTTP negotiate mechanism. Defaults to `false`.
         /// </summary>
-        public static Pulumi.Xyz.Region.Region? Region
+        public static bool? ClientAuthNegotiate
         {
-            get => _region.Get();
-            set => _region.Set(value);
+            get => _clientAuthNegotiate.Get();
+            set => _clientAuthNegotiate.Set(value);
+        }
+
+        private static readonly __Value<string?> _clientPassword = new __Value<string?>(() => __config.Get("clientPassword"));
+        /// <summary>
+        /// The username to authenticate against Foreman. This can also be set through the environment variable
+        /// `FOREMAN_CLIENT_PASSWORD`. Defaults to `""`.
+        /// </summary>
+        public static string? ClientPassword
+        {
+            get => _clientPassword.Get();
+            set => _clientPassword.Set(value);
+        }
+
+        private static readonly __Value<bool?> _clientTlsInsecure = new __Value<bool?>(() => __config.GetBoolean("clientTlsInsecure"));
+        /// <summary>
+        /// Whether or not to verify the server's certificate. Defaults to `false`.
+        /// </summary>
+        public static bool? ClientTlsInsecure
+        {
+            get => _clientTlsInsecure.Get();
+            set => _clientTlsInsecure.Set(value);
+        }
+
+        private static readonly __Value<string?> _clientUsername = new __Value<string?>(() => __config.Get("clientUsername"));
+        /// <summary>
+        /// The username to authenticate against Foreman. This can also be set through the environment variable
+        /// `FOREMAN_CLIENT_USERNAME`. Defaults to `""`.
+        /// </summary>
+        public static string? ClientUsername
+        {
+            get => _clientUsername.Get();
+            set => _clientUsername.Set(value);
+        }
+
+        private static readonly __Value<int?> _locationId = new __Value<int?>(() => __config.GetInt32("locationId"));
+        /// <summary>
+        /// The location for all resources requested and created by the providerDefaults to "0". Set organization_id and location_id
+        /// to a value &lt; 0 if you need to disable Locations and Organizations on Foreman older than 1.21
+        /// </summary>
+        public static int? LocationId
+        {
+            get => _locationId.Get();
+            set => _locationId.Set(value);
+        }
+
+        private static readonly __Value<int?> _organizationId = new __Value<int?>(() => __config.GetInt32("organizationId"));
+        /// <summary>
+        /// The organization for all resource requested and created by the Provider Defaults to "0". Set organization_id and
+        /// location_id to a value &lt; 0 if you need to disable Locations and Organizations on Foreman older than 1.21
+        /// </summary>
+        public static int? OrganizationId
+        {
+            get => _organizationId.Get();
+            set => _organizationId.Set(value);
+        }
+
+        private static readonly __Value<string?> _providerLogfile = new __Value<string?>(() => __config.Get("providerLogfile"));
+        public static string? ProviderLogfile
+        {
+            get => _providerLogfile.Get();
+            set => _providerLogfile.Set(value);
+        }
+
+        private static readonly __Value<string?> _providerLoglevel = new __Value<string?>(() => __config.Get("providerLoglevel"));
+        /// <summary>
+        /// The level of verbosity for the provider's log file. This setting determines which types of log messages are written and
+        /// which are ignored. Possible values (from most verbose to least verbose) include 'DEBUG', 'TRACE', 'INFO', 'WARNING',
+        /// 'ERROR', and 'NONE'. The provider's logs will be written to the location specified by `provider_logfile`. This can also
+        /// be set through the environment variable `FOREMAN_PROVIDER_LOGLEVEL`. Defaults to `'INFO'`.
+        /// </summary>
+        public static string? ProviderLoglevel
+        {
+            get => _providerLoglevel.Get();
+            set => _providerLoglevel.Set(value);
+        }
+
+        private static readonly __Value<string?> _serverHostname = new __Value<string?>(() => __config.Get("serverHostname"));
+        /// <summary>
+        /// The hostname / IP address of the Foreman REST API server
+        /// </summary>
+        public static string? ServerHostname
+        {
+            get => _serverHostname.Get();
+            set => _serverHostname.Set(value);
+        }
+
+        private static readonly __Value<string?> _serverProtocol = new __Value<string?>(() => __config.Get("serverProtocol"));
+        /// <summary>
+        /// The protocol the Foreman REST API server is using for communication. Defaults to `"https"`.
+        /// </summary>
+        public static string? ServerProtocol
+        {
+            get => _serverProtocol.Get();
+            set => _serverProtocol.Set(value);
         }
 
     }

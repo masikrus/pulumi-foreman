@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Pulumi</Authors>
-    <Company>Pulumi</Company>
-    <Description>A Pulumi package for creating and managing xyz cloud resources.</Description>
+    <Authors>masikrus</Authors>
+    <Company>masikrus</Company>
+    <Description>A Pulumi package for creating and managing foreman cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pulumi/pulumi-xyz</RepositoryUrl>
+    <RepositoryUrl>https://github.com/masikrus/pulumi-foreman</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
-    <Version>1.0.0-alpha.0+dev</Version>
+    <Version>1.0.0</Version>
 
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
