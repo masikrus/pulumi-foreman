@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/examples
+module github.com/masikrus/pulumi-foreman/examples
 
 go 1.22
 

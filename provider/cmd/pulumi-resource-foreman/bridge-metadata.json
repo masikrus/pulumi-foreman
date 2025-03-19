@@ -1,0 +1,452 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "foreman_architecture": {
+                "current": "foreman:index/architecture:Architecture",
+                "majorVersion": 1,
+                "fields": {
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_computeprofile": {
+                "current": "foreman:index/computeprofile:Computeprofile",
+                "majorVersion": 1,
+                "fields": {
+                    "compute_attributes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_computeresource": {
+                "current": "foreman:index/computeresource:Computeresource",
+                "majorVersion": 1
+            },
+            "foreman_defaulttemplate": {
+                "current": "foreman:index/defaulttemplate:Defaulttemplate",
+                "majorVersion": 1
+            },
+            "foreman_domain": {
+                "current": "foreman:index/domain:Domain",
+                "majorVersion": 1
+            },
+            "foreman_environment": {
+                "current": "foreman:index/environment:Environment",
+                "majorVersion": 1
+            },
+            "foreman_global_parameter": {
+                "current": "foreman:index/globalParameter:GlobalParameter",
+                "majorVersion": 1
+            },
+            "foreman_host": {
+                "current": "foreman:index/host:Host",
+                "majorVersion": 1,
+                "fields": {
+                    "config_group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "interfaces_attributes": {
+                        "maxItemsOne": false
+                    },
+                    "puppet_class_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_hostgroup": {
+                "current": "foreman:index/hostgroup:Hostgroup",
+                "majorVersion": 1,
+                "fields": {
+                    "config_group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "puppet_class_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_httpproxy": {
+                "current": "foreman:index/httpproxy:Httpproxy",
+                "majorVersion": 1
+            },
+            "foreman_image": {
+                "current": "foreman:index/image:Image",
+                "majorVersion": 1
+            },
+            "foreman_jobtemplate": {
+                "current": "foreman:index/jobtemplate:Jobtemplate",
+                "majorVersion": 1,
+                "fields": {
+                    "template_inputs": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_katello_content_credential": {
+                "current": "foreman:index/katelloContentCredential:KatelloContentCredential",
+                "majorVersion": 1
+            },
+            "foreman_katello_content_view": {
+                "current": "foreman:index/katelloContentView:KatelloContentView",
+                "majorVersion": 1,
+                "fields": {
+                    "component_ids": {
+                        "maxItemsOne": false
+                    },
+                    "filter": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "rule": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "repository_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_katello_lifecycle_environment": {
+                "current": "foreman:index/katelloLifecycleEnvironment:KatelloLifecycleEnvironment",
+                "majorVersion": 1
+            },
+            "foreman_katello_product": {
+                "current": "foreman:index/katelloProduct:KatelloProduct",
+                "majorVersion": 1
+            },
+            "foreman_katello_repository": {
+                "current": "foreman:index/katelloRepository:KatelloRepository",
+                "majorVersion": 1
+            },
+            "foreman_katello_sync_plan": {
+                "current": "foreman:index/katelloSyncPlan:KatelloSyncPlan",
+                "majorVersion": 1
+            },
+            "foreman_media": {
+                "current": "foreman:index/media:Media",
+                "majorVersion": 1,
+                "fields": {
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_model": {
+                "current": "foreman:index/model:Model",
+                "majorVersion": 1
+            },
+            "foreman_operatingsystem": {
+                "current": "foreman:index/operatingsystem:Operatingsystem",
+                "majorVersion": 1,
+                "fields": {
+                    "architectures": {
+                        "maxItemsOne": false
+                    },
+                    "media": {
+                        "maxItemsOne": false
+                    },
+                    "partitiontables": {
+                        "maxItemsOne": false
+                    },
+                    "provisioning_templates": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_override_value": {
+                "current": "foreman:index/overrideValue:OverrideValue",
+                "majorVersion": 1
+            },
+            "foreman_parameter": {
+                "current": "foreman:index/parameter:Parameter",
+                "majorVersion": 1
+            },
+            "foreman_partitiontable": {
+                "current": "foreman:index/partitiontable:Partitiontable",
+                "majorVersion": 1,
+                "fields": {
+                    "host_ids": {
+                        "maxItemsOne": false
+                    },
+                    "hostgroup_ids": {
+                        "maxItemsOne": false
+                    },
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_provisioningtemplate": {
+                "current": "foreman:index/provisioningtemplate:Provisioningtemplate",
+                "majorVersion": 1,
+                "fields": {
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    },
+                    "template_combinations_attributes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_smartproxy": {
+                "current": "foreman:index/smartproxy:Smartproxy",
+                "majorVersion": 1
+            },
+            "foreman_subnet": {
+                "current": "foreman:index/subnet:Subnet",
+                "majorVersion": 1,
+                "fields": {
+                    "domain_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_templateinput": {
+                "current": "foreman:index/templateinput:Templateinput",
+                "majorVersion": 1
+            },
+            "foreman_user": {
+                "current": "foreman:index/user:User",
+                "majorVersion": 1,
+                "fields": {
+                    "location_ids": {
+                        "maxItemsOne": false
+                    },
+                    "organization_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_usergroup": {
+                "current": "foreman:index/usergroup:Usergroup",
+                "majorVersion": 1
+            }
+        },
+        "datasources": {
+            "foreman_architecture": {
+                "current": "foreman:index/getArchitecture:getArchitecture",
+                "majorVersion": 1,
+                "fields": {
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_computeprofile": {
+                "current": "foreman:index/getComputeprofile:getComputeprofile",
+                "majorVersion": 1,
+                "fields": {
+                    "compute_attributes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_computeresource": {
+                "current": "foreman:index/getComputeresource:getComputeresource",
+                "majorVersion": 1
+            },
+            "foreman_defaulttemplate": {
+                "current": "foreman:index/getDefaulttemplate:getDefaulttemplate",
+                "majorVersion": 1
+            },
+            "foreman_domain": {
+                "current": "foreman:index/getDomain:getDomain",
+                "majorVersion": 1
+            },
+            "foreman_environment": {
+                "current": "foreman:index/getEnvironment:getEnvironment",
+                "majorVersion": 1
+            },
+            "foreman_global_parameter": {
+                "current": "foreman:index/getGlobalParameter:getGlobalParameter",
+                "majorVersion": 1
+            },
+            "foreman_hostgroup": {
+                "current": "foreman:index/getHostgroup:getHostgroup",
+                "majorVersion": 1,
+                "fields": {
+                    "config_group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "puppet_class_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_httpproxy": {
+                "current": "foreman:index/getHttpproxy:getHttpproxy",
+                "majorVersion": 1
+            },
+            "foreman_image": {
+                "current": "foreman:index/getImage:getImage",
+                "majorVersion": 1
+            },
+            "foreman_jobtemplate": {
+                "current": "foreman:index/getJobtemplate:getJobtemplate",
+                "majorVersion": 1,
+                "fields": {
+                    "template_inputs": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_katello_content_credential": {
+                "current": "foreman:index/getKatelloContentCredential:getKatelloContentCredential",
+                "majorVersion": 1
+            },
+            "foreman_katello_content_view": {
+                "current": "foreman:index/getKatelloContentView:getKatelloContentView",
+                "majorVersion": 1,
+                "fields": {
+                    "component_ids": {
+                        "maxItemsOne": false
+                    },
+                    "filter": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "rule": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "repository_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_katello_lifecycle_environment": {
+                "current": "foreman:index/getKatelloLifecycleEnvironment:getKatelloLifecycleEnvironment",
+                "majorVersion": 1
+            },
+            "foreman_katello_product": {
+                "current": "foreman:index/getKatelloProduct:getKatelloProduct",
+                "majorVersion": 1
+            },
+            "foreman_katello_repository": {
+                "current": "foreman:index/getKatelloRepository:getKatelloRepository",
+                "majorVersion": 1
+            },
+            "foreman_katello_sync_plan": {
+                "current": "foreman:index/getKatelloSyncPlan:getKatelloSyncPlan",
+                "majorVersion": 1
+            },
+            "foreman_media": {
+                "current": "foreman:index/getMedia:getMedia",
+                "majorVersion": 1,
+                "fields": {
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_model": {
+                "current": "foreman:index/getModel:getModel",
+                "majorVersion": 1
+            },
+            "foreman_operatingsystem": {
+                "current": "foreman:index/getOperatingsystem:getOperatingsystem",
+                "majorVersion": 1,
+                "fields": {
+                    "architectures": {
+                        "maxItemsOne": false
+                    },
+                    "media": {
+                        "maxItemsOne": false
+                    },
+                    "partitiontables": {
+                        "maxItemsOne": false
+                    },
+                    "provisioning_templates": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_parameter": {
+                "current": "foreman:index/getParameter:getParameter",
+                "majorVersion": 1
+            },
+            "foreman_partitiontable": {
+                "current": "foreman:index/getPartitiontable:getPartitiontable",
+                "majorVersion": 1,
+                "fields": {
+                    "host_ids": {
+                        "maxItemsOne": false
+                    },
+                    "hostgroup_ids": {
+                        "maxItemsOne": false
+                    },
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_provisioningtemplate": {
+                "current": "foreman:index/getProvisioningtemplate:getProvisioningtemplate",
+                "majorVersion": 1,
+                "fields": {
+                    "operatingsystem_ids": {
+                        "maxItemsOne": false
+                    },
+                    "template_combinations_attributes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_puppetclass": {
+                "current": "foreman:index/getPuppetclass:getPuppetclass",
+                "majorVersion": 1
+            },
+            "foreman_setting": {
+                "current": "foreman:index/getSetting:getSetting",
+                "majorVersion": 1
+            },
+            "foreman_smartclassparameter": {
+                "current": "foreman:index/getSmartclassparameter:getSmartclassparameter",
+                "majorVersion": 1
+            },
+            "foreman_smartproxy": {
+                "current": "foreman:index/getSmartproxy:getSmartproxy",
+                "majorVersion": 1
+            },
+            "foreman_subnet": {
+                "current": "foreman:index/getSubnet:getSubnet",
+                "majorVersion": 1,
+                "fields": {
+                    "domain_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_templateinput": {
+                "current": "foreman:index/getTemplateinput:getTemplateinput",
+                "majorVersion": 1
+            },
+            "foreman_templatekind": {
+                "current": "foreman:index/getTemplatekind:getTemplatekind",
+                "majorVersion": 1
+            },
+            "foreman_user": {
+                "current": "foreman:index/getUser:getUser",
+                "majorVersion": 1,
+                "fields": {
+                    "location_ids": {
+                        "maxItemsOne": false
+                    },
+                    "organization_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "foreman_usergroup": {
+                "current": "foreman:index/getUsergroup:getUsergroup",
+                "majorVersion": 1
+            }
+        }
+    },
+    "auto-settings": {}
+}
