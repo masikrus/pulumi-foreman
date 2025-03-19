@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-foreman/sdk
+module github.com/masikrus/pulumi-foreman/sdk
 
 go 1.22
 
