@@ -52,7 +52,12 @@
             },
             "clientPassword": {
                 "type": "string",
-                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_PASSWORD`. Defaults to `\"\"`.\n"
+                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_PASSWORD`. Defaults to `\"\"`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_CLIENT_PASSWORD"
+                    ]
+                }
             },
             "clientTlsInsecure": {
                 "type": "boolean",
@@ -60,7 +65,12 @@
             },
             "clientUsername": {
                 "type": "string",
-                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_USERNAME`. Defaults to `\"\"`.\n"
+                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_USERNAME`. Defaults to `\"\"`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_CLIENT_USERNAME"
+                    ]
+                }
             },
             "locationId": {
                 "type": "integer",
@@ -79,11 +89,21 @@
             },
             "serverHostname": {
                 "type": "string",
-                "description": "The hostname / IP address of the Foreman REST API server\n"
+                "description": "The hostname / IP address of the Foreman REST API server\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_SERVER_HOSTNAME"
+                    ]
+                }
             },
             "serverProtocol": {
                 "type": "string",
-                "description": "The protocol the Foreman REST API server is using for communication. Defaults to `\"https\"`.\n"
+                "description": "The protocol the Foreman REST API server is using for communication. Defaults to `\"https\"`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_PROTOCOL"
+                    ]
+                }
             }
         },
         "defaults": [
@@ -584,19 +604,6 @@
                     "requiredInputs": []
                 }
             }
-        },
-        "foreman:region/region:Region": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "here",
-                    "value": "HERE"
-                },
-                {
-                    "name": "overThere",
-                    "value": "OVER_THERE"
-                }
-            ]
         }
     },
     "provider": {
@@ -642,9 +649,6 @@
                 "description": "The protocol the Foreman REST API server is using for communication. Defaults to `\"https\"`.\n"
             }
         },
-        "required": [
-            "serverHostname"
-        ],
         "inputProperties": {
             "clientAuthNegotiate": {
                 "type": "boolean",
@@ -652,7 +656,12 @@
             },
             "clientPassword": {
                 "type": "string",
-                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_PASSWORD`. Defaults to `\"\"`.\n"
+                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_PASSWORD`. Defaults to `\"\"`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_CLIENT_PASSWORD"
+                    ]
+                }
             },
             "clientTlsInsecure": {
                 "type": "boolean",
@@ -660,7 +669,12 @@
             },
             "clientUsername": {
                 "type": "string",
-                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_USERNAME`. Defaults to `\"\"`.\n"
+                "description": "The username to authenticate against Foreman. This can also be set through the environment variable\n`FOREMAN_CLIENT_USERNAME`. Defaults to `\"\"`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_CLIENT_USERNAME"
+                    ]
+                }
             },
             "locationId": {
                 "type": "integer",
@@ -679,16 +693,23 @@
             },
             "serverHostname": {
                 "type": "string",
-                "description": "The hostname / IP address of the Foreman REST API server\n"
+                "description": "The hostname / IP address of the Foreman REST API server\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_SERVER_HOSTNAME"
+                    ]
+                }
             },
             "serverProtocol": {
                 "type": "string",
-                "description": "The protocol the Foreman REST API server is using for communication. Defaults to `\"https\"`.\n"
+                "description": "The protocol the Foreman REST API server is using for communication. Defaults to `\"https\"`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_PROTOCOL"
+                    ]
+                }
             }
-        },
-        "requiredInputs": [
-            "serverHostname"
-        ]
+        }
     },
     "resources": {
         "foreman:index/architecture:Architecture": {
@@ -6308,6 +6329,42 @@
                     "operatingsystemIds",
                     "osFamily",
                     "snippet",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "foreman:index/getPolicy:getPolicy": {
+            "deprecationMessage": "foreman.index/getpolicy.getPolicy has been deprecated in favor of foreman.index/getenvironment.getEnvironment",
+            "inputs": {
+                "description": "A collection of arguments for invoking getPolicy.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getPolicy.\n",
+                "properties": {
+                    "__meta_": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.\n",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "__meta_",
+                    "name",
                     "id"
                 ],
                 "type": "object"

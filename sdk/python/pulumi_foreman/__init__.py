@@ -33,6 +33,7 @@ from .get_model import *
 from .get_operatingsystem import *
 from .get_parameter import *
 from .get_partitiontable import *
+from .get_policy import *
 from .get_provisioningtemplate import *
 from .get_puppetclass import *
 from .get_setting import *
@@ -75,11 +76,8 @@ from . import outputs
 if typing.TYPE_CHECKING:
     import pulumi_foreman.config as __config
     config = __config
-    import pulumi_foreman.region as __region
-    region = __region
 else:
     config = _utilities.lazy_import('pulumi_foreman.config')
-    region = _utilities.lazy_import('pulumi_foreman.region')
 
 _utilities.register(
     resource_modules="""

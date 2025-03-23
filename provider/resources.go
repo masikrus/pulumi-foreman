@@ -26,6 +26,7 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
+	tks "github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
 	"github.com/masikrus/pulumi-foreman/provider/pkg/version"
 )
@@ -41,6 +42,10 @@ const (
 
 //go:embed cmd/pulumi-resource-foreman/bridge-metadata.json
 var metadata []byte
+
+func ForemanDataSource(mod string, res string) tks.ModuleMember {
+	return tfbridge.MakeDataSource(mainPkg, mod, res)
+}
 
 // Provider returns additional overlaid schema and metadata associated with the provider.
 func Provider() tfbridge.ProviderInfo {
@@ -139,24 +144,29 @@ func Provider() tfbridge.ProviderInfo {
 		GitHubOrg:    "",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		Config: map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
-			"region": {
-				Type: "foreman:region/region:Region",
+			"server_hostname": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"FOREMAN_SERVER_HOSTNAME"},
+				},
+			},
+			"server_protocol": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"FOREMAN_PROTOCOL"},
+				},
+			},
+			"client_username": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"FOREMAN_CLIENT_USERNAME"},
+				},
+			},
+			"client_password": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"FOREMAN_CLIENT_PASSWORD"},
+				},
 			},
 		},
 		// If extra types are needed for configuration, they can be added here.
-		ExtraTypes: map[string]schema.ComplexTypeSpec{
-			"foreman:region/region:Region": {
-				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type: "string",
-				},
-				Enum: []schema.EnumValueSpec{
-					{Name: "here", Value: "HERE"},
-					{Name: "overThere", Value: "OVER_THERE"},
-				},
-			},
-		},
+		ExtraTypes: map[string]schema.ComplexTypeSpec{},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
 			RespectSchemaVersion: true,

@@ -33,7 +33,7 @@ class _ExportableConfig(types.ModuleType):
         The username to authenticate against Foreman. This can also be set through the environment variable
         `FOREMAN_CLIENT_PASSWORD`. Defaults to `""`.
         """
-        return __config__.get('clientPassword')
+        return __config__.get('clientPassword') or _utilities.get_env('FOREMAN_CLIENT_PASSWORD')
 
     @property
     def client_tls_insecure(self) -> Optional[bool]:
@@ -48,7 +48,7 @@ class _ExportableConfig(types.ModuleType):
         The username to authenticate against Foreman. This can also be set through the environment variable
         `FOREMAN_CLIENT_USERNAME`. Defaults to `""`.
         """
-        return __config__.get('clientUsername')
+        return __config__.get('clientUsername') or _utilities.get_env('FOREMAN_CLIENT_USERNAME')
 
     @property
     def location_id(self) -> Optional[int]:
@@ -85,12 +85,12 @@ class _ExportableConfig(types.ModuleType):
         """
         The hostname / IP address of the Foreman REST API server
         """
-        return __config__.get('serverHostname')
+        return __config__.get('serverHostname') or _utilities.get_env('FOREMAN_SERVER_HOSTNAME')
 
     @property
     def server_protocol(self) -> Optional[str]:
         """
         The protocol the Foreman REST API server is using for communication. Defaults to `"https"`.
         """
-        return __config__.get('serverProtocol')
+        return __config__.get('serverProtocol') or _utilities.get_env('FOREMAN_PROTOCOL')
 

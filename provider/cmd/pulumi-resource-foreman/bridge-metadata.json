@@ -258,6 +258,13 @@
             },
             "foreman_environment": {
                 "current": "foreman:index/getEnvironment:getEnvironment",
+                "past": [
+                    {
+                        "name": "foreman:index/getPolicy:getPolicy",
+                        "inCodegen": true,
+                        "majorVersion": 1
+                    }
+                ],
                 "majorVersion": 1
             },
             "foreman_global_parameter": {
@@ -448,5 +455,13 @@
             }
         }
     },
-    "auto-settings": {}
+    "auto-settings": {
+        "datasources": {
+            "foreman_environment": {
+                "renames": [
+                    "foreman:index/getPolicy:getPolicy"
+                ]
+            }
+        }
+    }
 }

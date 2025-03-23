@@ -19,7 +19,6 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 server_hostname: pulumi.Input[str],
                  client_auth_negotiate: Optional[pulumi.Input[bool]] = None,
                  client_password: Optional[pulumi.Input[str]] = None,
                  client_tls_insecure: Optional[pulumi.Input[bool]] = None,
@@ -28,10 +27,10 @@ class ProviderArgs:
                  organization_id: Optional[pulumi.Input[int]] = None,
                  provider_logfile: Optional[pulumi.Input[str]] = None,
                  provider_loglevel: Optional[pulumi.Input[str]] = None,
+                 server_hostname: Optional[pulumi.Input[str]] = None,
                  server_protocol: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
-        :param pulumi.Input[str] server_hostname: The hostname / IP address of the Foreman REST API server
         :param pulumi.Input[bool] client_auth_negotiate: Whether or not the client should try to authenticate through the HTTP negotiate mechanism. Defaults to `false`.
         :param pulumi.Input[str] client_password: The username to authenticate against Foreman. This can also be set through the environment variable
                `FOREMAN_CLIENT_PASSWORD`. Defaults to `""`.
@@ -46,15 +45,19 @@ class ProviderArgs:
                which are ignored. Possible values (from most verbose to least verbose) include 'DEBUG', 'TRACE', 'INFO', 'WARNING',
                'ERROR', and 'NONE'. The provider's logs will be written to the location specified by `provider_logfile`. This can also
                be set through the environment variable `FOREMAN_PROVIDER_LOGLEVEL`. Defaults to `'INFO'`.
+        :param pulumi.Input[str] server_hostname: The hostname / IP address of the Foreman REST API server
         :param pulumi.Input[str] server_protocol: The protocol the Foreman REST API server is using for communication. Defaults to `"https"`.
         """
-        pulumi.set(__self__, "server_hostname", server_hostname)
         if client_auth_negotiate is not None:
             pulumi.set(__self__, "client_auth_negotiate", client_auth_negotiate)
+        if client_password is None:
+            client_password = _utilities.get_env('FOREMAN_CLIENT_PASSWORD')
         if client_password is not None:
             pulumi.set(__self__, "client_password", client_password)
         if client_tls_insecure is not None:
             pulumi.set(__self__, "client_tls_insecure", client_tls_insecure)
+        if client_username is None:
+            client_username = _utilities.get_env('FOREMAN_CLIENT_USERNAME')
         if client_username is not None:
             pulumi.set(__self__, "client_username", client_username)
         if location_id is not None:
@@ -65,20 +68,14 @@ class ProviderArgs:
             pulumi.set(__self__, "provider_logfile", provider_logfile)
         if provider_loglevel is not None:
             pulumi.set(__self__, "provider_loglevel", provider_loglevel)
+        if server_hostname is None:
+            server_hostname = _utilities.get_env('FOREMAN_SERVER_HOSTNAME')
+        if server_hostname is not None:
+            pulumi.set(__self__, "server_hostname", server_hostname)
+        if server_protocol is None:
+            server_protocol = _utilities.get_env('FOREMAN_PROTOCOL')
         if server_protocol is not None:
             pulumi.set(__self__, "server_protocol", server_protocol)
-
-    @property
-    @pulumi.getter(name="serverHostname")
-    def server_hostname(self) -> pulumi.Input[str]:
-        """
-        The hostname / IP address of the Foreman REST API server
-        """
-        return pulumi.get(self, "server_hostname")
-
-    @server_hostname.setter
-    def server_hostname(self, value: pulumi.Input[str]):
-        pulumi.set(self, "server_hostname", value)
 
     @property
     @pulumi.getter(name="clientAuthNegotiate")
@@ -181,6 +178,18 @@ class ProviderArgs:
         pulumi.set(self, "provider_loglevel", value)
 
     @property
+    @pulumi.getter(name="serverHostname")
+    def server_hostname(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hostname / IP address of the Foreman REST API server
+        """
+        return pulumi.get(self, "server_hostname")
+
+    @server_hostname.setter
+    def server_hostname(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "server_hostname", value)
+
+    @property
     @pulumi.getter(name="serverProtocol")
     def server_protocol(self) -> Optional[pulumi.Input[str]]:
         """
@@ -238,7 +247,7 @@ class Provider(pulumi.ProviderResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ProviderArgs,
+                 args: Optional[ProviderArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         The provider type for the foreman package. By default, resources use package-wide configuration
@@ -281,16 +290,22 @@ class Provider(pulumi.ProviderResource):
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
             __props__.__dict__["client_auth_negotiate"] = pulumi.Output.from_input(client_auth_negotiate).apply(pulumi.runtime.to_json) if client_auth_negotiate is not None else None
+            if client_password is None:
+                client_password = _utilities.get_env('FOREMAN_CLIENT_PASSWORD')
             __props__.__dict__["client_password"] = client_password
             __props__.__dict__["client_tls_insecure"] = pulumi.Output.from_input(client_tls_insecure).apply(pulumi.runtime.to_json) if client_tls_insecure is not None else None
+            if client_username is None:
+                client_username = _utilities.get_env('FOREMAN_CLIENT_USERNAME')
             __props__.__dict__["client_username"] = client_username
             __props__.__dict__["location_id"] = pulumi.Output.from_input(location_id).apply(pulumi.runtime.to_json) if location_id is not None else None
             __props__.__dict__["organization_id"] = pulumi.Output.from_input(organization_id).apply(pulumi.runtime.to_json) if organization_id is not None else None
             __props__.__dict__["provider_logfile"] = provider_logfile
             __props__.__dict__["provider_loglevel"] = provider_loglevel
-            if server_hostname is None and not opts.urn:
-                raise TypeError("Missing required property 'server_hostname'")
+            if server_hostname is None:
+                server_hostname = _utilities.get_env('FOREMAN_SERVER_HOSTNAME')
             __props__.__dict__["server_hostname"] = server_hostname
+            if server_protocol is None:
+                server_protocol = _utilities.get_env('FOREMAN_PROTOCOL')
             __props__.__dict__["server_protocol"] = server_protocol
         super(Provider, __self__).__init__(
             'foreman',
@@ -334,7 +349,7 @@ class Provider(pulumi.ProviderResource):
 
     @property
     @pulumi.getter(name="serverHostname")
-    def server_hostname(self) -> pulumi.Output[str]:
+    def server_hostname(self) -> pulumi.Output[Optional[str]]:
         """
         The hostname / IP address of the Foreman REST API server
         """
