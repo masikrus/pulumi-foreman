@@ -16,6 +16,9 @@ package foreman
 
 import (
 	"path"
+	"strings"
+	"sync"
+	"unicode"
 
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
@@ -23,10 +26,11 @@ import (
 	foreman "github.com/terraform-coop/terraform-provider-foreman/foreman" // Import the upstream provider
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
+	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
+
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
-	tks "github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
 	"github.com/masikrus/pulumi-foreman/provider/pkg/version"
 )
@@ -43,8 +47,35 @@ const (
 //go:embed cmd/pulumi-resource-foreman/bridge-metadata.json
 var metadata []byte
 
-func ForemanDataSource(mod string, res string) tks.ModuleMember {
-	return tfbridge.MakeDataSource(mainPkg, mod, res)
+var _nslock = sync.Mutex{}
+
+var namespaceMap = map[string]string{
+	"foreman": "Foreman",
+}
+
+func ForemanMember(moduleTitle string, fn string, mem string) tokens.ModuleMember {
+	moduleName := strings.ToLower(moduleTitle)
+	_nslock.Lock()
+	defer _nslock.Unlock()
+	namespaceMap[moduleName] = moduleTitle
+	if fn != "" {
+		moduleName += "/" + fn
+	}
+	return tokens.ModuleMember(mainPkg + ":" + moduleName + ":" + mem)
+}
+
+func ForemanType(mod string, fn string, typ string) tokens.Type {
+	return tokens.Type(ForemanMember(mod, fn, typ))
+}
+
+func ForemanTypeDefaultFile(mod string, typ string) tokens.Type {
+	fn := string(unicode.ToLower(rune(typ[0]))) + typ[1:]
+	return ForemanType(mod, fn, typ)
+}
+
+func ForemanDataSource(mod string, res string) tokens.ModuleMember {
+	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
+	return ForemanMember(mod, fn, res)
 }
 
 // Provider returns additional overlaid schema and metadata associated with the provider.
@@ -141,7 +172,17 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/masikrus/pulumi-foreman",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this should
 		// match the TF provider module's require directive, not any replace directives.
-		GitHubOrg:    "",
+		GitHubOrg: "",
+		DataSources: map[string]*tfbridge.DataSourceInfo{
+			"foreman_environment": {
+				Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_": {Omit: true},
+				},
+			},
+		},
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		Config: map[string]*tfbridge.SchemaInfo{
 			"server_hostname": {
@@ -207,8 +248,8 @@ func Provider() tfbridge.ProviderInfo {
 	//
 	// You shouldn't need to override anything, but if you do, use the [tfbridge.ProviderInfo.Resources]
 	// and [tfbridge.ProviderInfo.DataSources].
-	prov.MustComputeTokens(tokens.SingleModule("foreman_", mainMod,
-		tokens.MakeStandard(mainPkg)))
+	prov.MustComputeTokens(tks.SingleModule("foreman_", mainMod,
+		tks.MakeStandard(mainPkg)))
 
 	prov.MustApplyAutoAliases()
 	prov.SetAutonaming(255, "-")
