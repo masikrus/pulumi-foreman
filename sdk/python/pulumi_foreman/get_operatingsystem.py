@@ -26,10 +26,7 @@ class GetOperatingsystemResult:
     """
     A collection of values returned by getOperatingsystem.
     """
-    def __init__(__self__, __meta_=None, architectures=None, description=None, family=None, id=None, major=None, media=None, minor=None, name=None, parameters=None, partitiontables=None, password_hash=None, provisioning_templates=None, release_name=None, title=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, architectures=None, description=None, family=None, id=None, major=None, media=None, minor=None, name=None, parameters=None, partitiontables=None, password_hash=None, provisioning_templates=None, release_name=None, title=None):
         if architectures and not isinstance(architectures, list):
             raise TypeError("Expected argument 'architectures' to be a list")
         pulumi.set(__self__, "architectures", architectures)
@@ -72,11 +69,6 @@ class GetOperatingsystemResult:
         if title and not isinstance(title, str):
             raise TypeError("Expected argument 'title' to be a str")
         pulumi.set(__self__, "title", title)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -158,7 +150,6 @@ class AwaitableGetOperatingsystemResult(GetOperatingsystemResult):
         if False:
             yield self
         return GetOperatingsystemResult(
-            __meta_=self.__meta_,
             architectures=self.architectures,
             description=self.description,
             family=self.family,
@@ -186,7 +177,6 @@ def get_operatingsystem(title: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getOperatingsystem:getOperatingsystem', __args__, opts=opts, typ=GetOperatingsystemResult).value
 
     return AwaitableGetOperatingsystemResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         architectures=pulumi.get(__ret__, 'architectures'),
         description=pulumi.get(__ret__, 'description'),
         family=pulumi.get(__ret__, 'family'),
@@ -211,7 +201,6 @@ def get_operatingsystem_output(title: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getOperatingsystem:getOperatingsystem', __args__, opts=opts, typ=GetOperatingsystemResult)
     return __ret__.apply(lambda __response__: GetOperatingsystemResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         architectures=pulumi.get(__response__, 'architectures'),
         description=pulumi.get(__response__, 'description'),
         family=pulumi.get(__response__, 'family'),

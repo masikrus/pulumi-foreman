@@ -26,10 +26,7 @@ class GetKatelloContentCredentialResult:
     """
     A collection of values returned by getKatelloContentCredential.
     """
-    def __init__(__self__, __meta_=None, content=None, id=None, name=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, content=None, id=None, name=None):
         if content and not isinstance(content, str):
             raise TypeError("Expected argument 'content' to be a str")
         pulumi.set(__self__, "content", content)
@@ -39,11 +36,6 @@ class GetKatelloContentCredentialResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -70,7 +62,6 @@ class AwaitableGetKatelloContentCredentialResult(GetKatelloContentCredentialResu
         if False:
             yield self
         return GetKatelloContentCredentialResult(
-            __meta_=self.__meta_,
             content=self.content,
             id=self.id,
             name=self.name)
@@ -87,7 +78,6 @@ def get_katello_content_credential(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getKatelloContentCredential:getKatelloContentCredential', __args__, opts=opts, typ=GetKatelloContentCredentialResult).value
 
     return AwaitableGetKatelloContentCredentialResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         content=pulumi.get(__ret__, 'content'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'))
@@ -101,7 +91,6 @@ def get_katello_content_credential_output(name: Optional[pulumi.Input[str]] = No
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getKatelloContentCredential:getKatelloContentCredential', __args__, opts=opts, typ=GetKatelloContentCredentialResult)
     return __ret__.apply(lambda __response__: GetKatelloContentCredentialResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         content=pulumi.get(__response__, 'content'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name')))

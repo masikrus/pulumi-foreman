@@ -26,10 +26,7 @@ class GetSubnetResult:
     """
     A collection of values returned by getSubnet.
     """
-    def __init__(__self__, __meta_=None, bmc_id=None, boot_mode=None, description=None, dhcp_id=None, dns_primary=None, dns_secondary=None, domain_ids=None, from_=None, gateway=None, httpboot_id=None, id=None, ipam=None, mask=None, mtu=None, name=None, network=None, network_address=None, network_type=None, template_id=None, tftp_id=None, to=None, vlanid=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, bmc_id=None, boot_mode=None, description=None, dhcp_id=None, dns_primary=None, dns_secondary=None, domain_ids=None, from_=None, gateway=None, httpboot_id=None, id=None, ipam=None, mask=None, mtu=None, name=None, network=None, network_address=None, network_type=None, template_id=None, tftp_id=None, to=None, vlanid=None):
         if bmc_id and not isinstance(bmc_id, int):
             raise TypeError("Expected argument 'bmc_id' to be a int")
         pulumi.set(__self__, "bmc_id", bmc_id)
@@ -96,11 +93,6 @@ class GetSubnetResult:
         if vlanid and not isinstance(vlanid, int):
             raise TypeError("Expected argument 'vlanid' to be a int")
         pulumi.set(__self__, "vlanid", vlanid)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="bmcId")
@@ -222,7 +214,6 @@ class AwaitableGetSubnetResult(GetSubnetResult):
         if False:
             yield self
         return GetSubnetResult(
-            __meta_=self.__meta_,
             bmc_id=self.bmc_id,
             boot_mode=self.boot_mode,
             description=self.description,
@@ -260,7 +251,6 @@ def get_subnet(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getSubnet:getSubnet', __args__, opts=opts, typ=GetSubnetResult).value
 
     return AwaitableGetSubnetResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         bmc_id=pulumi.get(__ret__, 'bmc_id'),
         boot_mode=pulumi.get(__ret__, 'boot_mode'),
         description=pulumi.get(__ret__, 'description'),
@@ -295,7 +285,6 @@ def get_subnet_output(name: Optional[pulumi.Input[Optional[str]]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getSubnet:getSubnet', __args__, opts=opts, typ=GetSubnetResult)
     return __ret__.apply(lambda __response__: GetSubnetResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         bmc_id=pulumi.get(__response__, 'bmc_id'),
         boot_mode=pulumi.get(__response__, 'boot_mode'),
         description=pulumi.get(__response__, 'description'),

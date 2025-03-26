@@ -26,10 +26,7 @@ class GetDefaulttemplateResult:
     """
     A collection of values returned by getDefaulttemplate.
     """
-    def __init__(__self__, __meta_=None, id=None, name=None, operatingsystem_id=None, provisioningtemplate_id=None, templatekind_id=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, id=None, name=None, operatingsystem_id=None, provisioningtemplate_id=None, templatekind_id=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -45,11 +42,6 @@ class GetDefaulttemplateResult:
         if templatekind_id and not isinstance(templatekind_id, int):
             raise TypeError("Expected argument 'templatekind_id' to be a int")
         pulumi.set(__self__, "templatekind_id", templatekind_id)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -86,7 +78,6 @@ class AwaitableGetDefaulttemplateResult(GetDefaulttemplateResult):
         if False:
             yield self
         return GetDefaulttemplateResult(
-            __meta_=self.__meta_,
             id=self.id,
             name=self.name,
             operatingsystem_id=self.operatingsystem_id,
@@ -105,7 +96,6 @@ def get_defaulttemplate(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getDefaulttemplate:getDefaulttemplate', __args__, opts=opts, typ=GetDefaulttemplateResult).value
 
     return AwaitableGetDefaulttemplateResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         operatingsystem_id=pulumi.get(__ret__, 'operatingsystem_id'),
@@ -121,7 +111,6 @@ def get_defaulttemplate_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getDefaulttemplate:getDefaulttemplate', __args__, opts=opts, typ=GetDefaulttemplateResult)
     return __ret__.apply(lambda __response__: GetDefaulttemplateResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name'),
         operatingsystem_id=pulumi.get(__response__, 'operatingsystem_id'),

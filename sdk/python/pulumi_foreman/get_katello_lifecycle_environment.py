@@ -26,10 +26,7 @@ class GetKatelloLifecycleEnvironmentResult:
     """
     A collection of values returned by getKatelloLifecycleEnvironment.
     """
-    def __init__(__self__, __meta_=None, description=None, id=None, label=None, library=None, name=None, organization_id=None, prior_id=None, successor_id=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, description=None, id=None, label=None, library=None, name=None, organization_id=None, prior_id=None, successor_id=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         pulumi.set(__self__, "description", description)
@@ -54,11 +51,6 @@ class GetKatelloLifecycleEnvironmentResult:
         if successor_id and not isinstance(successor_id, int):
             raise TypeError("Expected argument 'successor_id' to be a int")
         pulumi.set(__self__, "successor_id", successor_id)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -110,7 +102,6 @@ class AwaitableGetKatelloLifecycleEnvironmentResult(GetKatelloLifecycleEnvironme
         if False:
             yield self
         return GetKatelloLifecycleEnvironmentResult(
-            __meta_=self.__meta_,
             description=self.description,
             id=self.id,
             label=self.label,
@@ -132,7 +123,6 @@ def get_katello_lifecycle_environment(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getKatelloLifecycleEnvironment:getKatelloLifecycleEnvironment', __args__, opts=opts, typ=GetKatelloLifecycleEnvironmentResult).value
 
     return AwaitableGetKatelloLifecycleEnvironmentResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         description=pulumi.get(__ret__, 'description'),
         id=pulumi.get(__ret__, 'id'),
         label=pulumi.get(__ret__, 'label'),
@@ -151,7 +141,6 @@ def get_katello_lifecycle_environment_output(name: Optional[pulumi.Input[str]] =
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getKatelloLifecycleEnvironment:getKatelloLifecycleEnvironment', __args__, opts=opts, typ=GetKatelloLifecycleEnvironmentResult)
     return __ret__.apply(lambda __response__: GetKatelloLifecycleEnvironmentResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         description=pulumi.get(__response__, 'description'),
         id=pulumi.get(__response__, 'id'),
         label=pulumi.get(__response__, 'label'),

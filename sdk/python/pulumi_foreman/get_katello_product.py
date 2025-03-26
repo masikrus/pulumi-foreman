@@ -26,10 +26,7 @@ class GetKatelloProductResult:
     """
     A collection of values returned by getKatelloProduct.
     """
-    def __init__(__self__, __meta_=None, description=None, gpg_key_id=None, id=None, label=None, name=None, ssl_ca_cert_id=None, ssl_client_cert_id=None, ssl_client_key_id=None, sync_plan_id=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, description=None, gpg_key_id=None, id=None, label=None, name=None, ssl_ca_cert_id=None, ssl_client_cert_id=None, ssl_client_key_id=None, sync_plan_id=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         pulumi.set(__self__, "description", description)
@@ -57,11 +54,6 @@ class GetKatelloProductResult:
         if sync_plan_id and not isinstance(sync_plan_id, int):
             raise TypeError("Expected argument 'sync_plan_id' to be a int")
         pulumi.set(__self__, "sync_plan_id", sync_plan_id)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -118,7 +110,6 @@ class AwaitableGetKatelloProductResult(GetKatelloProductResult):
         if False:
             yield self
         return GetKatelloProductResult(
-            __meta_=self.__meta_,
             description=self.description,
             gpg_key_id=self.gpg_key_id,
             id=self.id,
@@ -141,7 +132,6 @@ def get_katello_product(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getKatelloProduct:getKatelloProduct', __args__, opts=opts, typ=GetKatelloProductResult).value
 
     return AwaitableGetKatelloProductResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         description=pulumi.get(__ret__, 'description'),
         gpg_key_id=pulumi.get(__ret__, 'gpg_key_id'),
         id=pulumi.get(__ret__, 'id'),
@@ -161,7 +151,6 @@ def get_katello_product_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getKatelloProduct:getKatelloProduct', __args__, opts=opts, typ=GetKatelloProductResult)
     return __ret__.apply(lambda __response__: GetKatelloProductResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         description=pulumi.get(__response__, 'description'),
         gpg_key_id=pulumi.get(__response__, 'gpg_key_id'),
         id=pulumi.get(__response__, 'id'),

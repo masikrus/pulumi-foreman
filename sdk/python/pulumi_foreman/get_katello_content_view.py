@@ -27,10 +27,7 @@ class GetKatelloContentViewResult:
     """
     A collection of values returned by getKatelloContentView.
     """
-    def __init__(__self__, __meta_=None, auto_publish=None, component_ids=None, composite=None, description=None, filtered=None, filters=None, id=None, label=None, latest_version_id=None, name=None, organization_id=None, repository_ids=None, solve_dependencies=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, auto_publish=None, component_ids=None, composite=None, description=None, filtered=None, filters=None, id=None, label=None, latest_version_id=None, name=None, organization_id=None, repository_ids=None, solve_dependencies=None):
         if auto_publish and not isinstance(auto_publish, bool):
             raise TypeError("Expected argument 'auto_publish' to be a bool")
         pulumi.set(__self__, "auto_publish", auto_publish)
@@ -70,11 +67,6 @@ class GetKatelloContentViewResult:
         if solve_dependencies and not isinstance(solve_dependencies, bool):
             raise TypeError("Expected argument 'solve_dependencies' to be a bool")
         pulumi.set(__self__, "solve_dependencies", solve_dependencies)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="autoPublish")
@@ -151,7 +143,6 @@ class AwaitableGetKatelloContentViewResult(GetKatelloContentViewResult):
         if False:
             yield self
         return GetKatelloContentViewResult(
-            __meta_=self.__meta_,
             auto_publish=self.auto_publish,
             component_ids=self.component_ids,
             composite=self.composite,
@@ -178,7 +169,6 @@ def get_katello_content_view(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getKatelloContentView:getKatelloContentView', __args__, opts=opts, typ=GetKatelloContentViewResult).value
 
     return AwaitableGetKatelloContentViewResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         auto_publish=pulumi.get(__ret__, 'auto_publish'),
         component_ids=pulumi.get(__ret__, 'component_ids'),
         composite=pulumi.get(__ret__, 'composite'),
@@ -202,7 +192,6 @@ def get_katello_content_view_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getKatelloContentView:getKatelloContentView', __args__, opts=opts, typ=GetKatelloContentViewResult)
     return __ret__.apply(lambda __response__: GetKatelloContentViewResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         auto_publish=pulumi.get(__response__, 'auto_publish'),
         component_ids=pulumi.get(__response__, 'component_ids'),
         composite=pulumi.get(__response__, 'composite'),

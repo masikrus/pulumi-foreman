@@ -27,10 +27,7 @@ class GetProvisioningtemplateResult:
     """
     A collection of values returned by getProvisioningtemplate.
     """
-    def __init__(__self__, __meta_=None, audit_comment=None, description=None, id=None, locked=None, name=None, operatingsystem_ids=None, snippet=None, template=None, template_combinations_attributes=None, template_kind_id=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, audit_comment=None, description=None, id=None, locked=None, name=None, operatingsystem_ids=None, snippet=None, template=None, template_combinations_attributes=None, template_kind_id=None):
         if audit_comment and not isinstance(audit_comment, str):
             raise TypeError("Expected argument 'audit_comment' to be a str")
         pulumi.set(__self__, "audit_comment", audit_comment)
@@ -61,11 +58,6 @@ class GetProvisioningtemplateResult:
         if template_kind_id and not isinstance(template_kind_id, int):
             raise TypeError("Expected argument 'template_kind_id' to be a int")
         pulumi.set(__self__, "template_kind_id", template_kind_id)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="auditComment")
@@ -127,7 +119,6 @@ class AwaitableGetProvisioningtemplateResult(GetProvisioningtemplateResult):
         if False:
             yield self
         return GetProvisioningtemplateResult(
-            __meta_=self.__meta_,
             audit_comment=self.audit_comment,
             description=self.description,
             id=self.id,
@@ -151,7 +142,6 @@ def get_provisioningtemplate(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getProvisioningtemplate:getProvisioningtemplate', __args__, opts=opts, typ=GetProvisioningtemplateResult).value
 
     return AwaitableGetProvisioningtemplateResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         audit_comment=pulumi.get(__ret__, 'audit_comment'),
         description=pulumi.get(__ret__, 'description'),
         id=pulumi.get(__ret__, 'id'),
@@ -172,7 +162,6 @@ def get_provisioningtemplate_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getProvisioningtemplate:getProvisioningtemplate', __args__, opts=opts, typ=GetProvisioningtemplateResult)
     return __ret__.apply(lambda __response__: GetProvisioningtemplateResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         audit_comment=pulumi.get(__response__, 'audit_comment'),
         description=pulumi.get(__response__, 'description'),
         id=pulumi.get(__response__, 'id'),

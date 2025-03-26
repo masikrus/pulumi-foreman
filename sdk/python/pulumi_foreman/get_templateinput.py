@@ -26,10 +26,7 @@ class GetTemplateinputResult:
     """
     A collection of values returned by getTemplateinput.
     """
-    def __init__(__self__, __meta_=None, advanced=None, default=None, description=None, fact_name=None, hidden_value=None, id=None, input_type=None, name=None, puppet_class_name=None, puppet_parameter_name=None, required=None, resource_type=None, template_id=None, value_type=None, variable_name=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, advanced=None, default=None, description=None, fact_name=None, hidden_value=None, id=None, input_type=None, name=None, puppet_class_name=None, puppet_parameter_name=None, required=None, resource_type=None, template_id=None, value_type=None, variable_name=None):
         if advanced and not isinstance(advanced, bool):
             raise TypeError("Expected argument 'advanced' to be a bool")
         pulumi.set(__self__, "advanced", advanced)
@@ -75,11 +72,6 @@ class GetTemplateinputResult:
         if variable_name and not isinstance(variable_name, str):
             raise TypeError("Expected argument 'variable_name' to be a str")
         pulumi.set(__self__, "variable_name", variable_name)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -163,7 +155,6 @@ class AwaitableGetTemplateinputResult(GetTemplateinputResult):
         if False:
             yield self
         return GetTemplateinputResult(
-            __meta_=self.__meta_,
             advanced=self.advanced,
             default=self.default,
             description=self.description,
@@ -190,7 +181,6 @@ def get_templateinput(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableG
     __ret__ = pulumi.runtime.invoke('foreman:index/getTemplateinput:getTemplateinput', __args__, opts=opts, typ=GetTemplateinputResult).value
 
     return AwaitableGetTemplateinputResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         advanced=pulumi.get(__ret__, 'advanced'),
         default=pulumi.get(__ret__, 'default'),
         description=pulumi.get(__ret__, 'description'),
@@ -214,7 +204,6 @@ def get_templateinput_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.I
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getTemplateinput:getTemplateinput', __args__, opts=opts, typ=GetTemplateinputResult)
     return __ret__.apply(lambda __response__: GetTemplateinputResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         advanced=pulumi.get(__response__, 'advanced'),
         default=pulumi.get(__response__, 'default'),
         description=pulumi.get(__response__, 'description'),

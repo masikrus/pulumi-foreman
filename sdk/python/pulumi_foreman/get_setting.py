@@ -26,10 +26,7 @@ class GetSettingResult:
     """
     A collection of values returned by getSetting.
     """
-    def __init__(__self__, __meta_=None, category_name=None, default=None, description=None, id=None, name=None, readonly=None, settings_type=None, value=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, category_name=None, default=None, description=None, id=None, name=None, readonly=None, settings_type=None, value=None):
         if category_name and not isinstance(category_name, str):
             raise TypeError("Expected argument 'category_name' to be a str")
         pulumi.set(__self__, "category_name", category_name)
@@ -54,11 +51,6 @@ class GetSettingResult:
         if value and not isinstance(value, str):
             raise TypeError("Expected argument 'value' to be a str")
         pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="categoryName")
@@ -110,7 +102,6 @@ class AwaitableGetSettingResult(GetSettingResult):
         if False:
             yield self
         return GetSettingResult(
-            __meta_=self.__meta_,
             category_name=self.category_name,
             default=self.default,
             description=self.description,
@@ -132,7 +123,6 @@ def get_setting(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getSetting:getSetting', __args__, opts=opts, typ=GetSettingResult).value
 
     return AwaitableGetSettingResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         category_name=pulumi.get(__ret__, 'category_name'),
         default=pulumi.get(__ret__, 'default'),
         description=pulumi.get(__ret__, 'description'),
@@ -151,7 +141,6 @@ def get_setting_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getSetting:getSetting', __args__, opts=opts, typ=GetSettingResult)
     return __ret__.apply(lambda __response__: GetSettingResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         category_name=pulumi.get(__response__, 'category_name'),
         default=pulumi.get(__response__, 'default'),
         description=pulumi.get(__response__, 'description'),

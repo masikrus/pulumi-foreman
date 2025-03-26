@@ -26,10 +26,7 @@ class GetDomainResult:
     """
     A collection of values returned by getDomain.
     """
-    def __init__(__self__, __meta_=None, fullname=None, id=None, name=None, parameters=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, fullname=None, id=None, name=None, parameters=None):
         if fullname and not isinstance(fullname, str):
             raise TypeError("Expected argument 'fullname' to be a str")
         pulumi.set(__self__, "fullname", fullname)
@@ -42,11 +39,6 @@ class GetDomainResult:
         if parameters and not isinstance(parameters, dict):
             raise TypeError("Expected argument 'parameters' to be a dict")
         pulumi.set(__self__, "parameters", parameters)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -78,7 +70,6 @@ class AwaitableGetDomainResult(GetDomainResult):
         if False:
             yield self
         return GetDomainResult(
-            __meta_=self.__meta_,
             fullname=self.fullname,
             id=self.id,
             name=self.name,
@@ -96,7 +87,6 @@ def get_domain(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getDomain:getDomain', __args__, opts=opts, typ=GetDomainResult).value
 
     return AwaitableGetDomainResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         fullname=pulumi.get(__ret__, 'fullname'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
@@ -111,7 +101,6 @@ def get_domain_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getDomain:getDomain', __args__, opts=opts, typ=GetDomainResult)
     return __ret__.apply(lambda __response__: GetDomainResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         fullname=pulumi.get(__response__, 'fullname'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name'),

@@ -16,9 +16,6 @@ package foreman
 
 import (
 	"path"
-	"strings"
-	"sync"
-	"unicode"
 
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
@@ -30,7 +27,6 @@ import (
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
 	"github.com/masikrus/pulumi-foreman/provider/pkg/version"
 )
@@ -46,37 +42,6 @@ const (
 
 //go:embed cmd/pulumi-resource-foreman/bridge-metadata.json
 var metadata []byte
-
-var _nslock = sync.Mutex{}
-
-var namespaceMap = map[string]string{
-	"foreman": "Foreman",
-}
-
-func ForemanMember(moduleTitle string, fn string, mem string) tokens.ModuleMember {
-	moduleName := strings.ToLower(moduleTitle)
-	_nslock.Lock()
-	defer _nslock.Unlock()
-	namespaceMap[moduleName] = moduleTitle
-	if fn != "" {
-		moduleName += "/" + fn
-	}
-	return tokens.ModuleMember(mainPkg + ":" + moduleName + ":" + mem)
-}
-
-func ForemanType(mod string, fn string, typ string) tokens.Type {
-	return tokens.Type(ForemanMember(mod, fn, typ))
-}
-
-func ForemanTypeDefaultFile(mod string, typ string) tokens.Type {
-	fn := string(unicode.ToLower(rune(typ[0]))) + typ[1:]
-	return ForemanType(mod, fn, typ)
-}
-
-func ForemanDataSource(mod string, res string) tokens.ModuleMember {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return ForemanMember(mod, fn, res)
-}
 
 // Provider returns additional overlaid schema and metadata associated with the provider.
 func Provider() tfbridge.ProviderInfo {
@@ -174,12 +139,310 @@ func Provider() tfbridge.ProviderInfo {
 		// match the TF provider module's require directive, not any replace directives.
 		GitHubOrg: "",
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"foreman_environment": {
-				Tok: ForemanDataSource(mainMod, "getEnvironment"),
+			"foreman_architecture": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
 					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
-					"__meta_": {Omit: true},
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_computeprofile": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_computeresource": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_defaulttemplate": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_domain": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_environment": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_global_parameter": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_host": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_hostgroup": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_httpproxy": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_image": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_jobtemplate": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_katello_content_credential": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_katello_content_view": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_katello_lifecycle_environment": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_katello_product": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_katello_repository": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_katello_sync_plan": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_media": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_model": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_operatingsystem": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_override_value": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_parameter": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_partitiontable": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_provisioningtemplate": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_puppetclass": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_setting": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_smartclassparameter": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_smartproxy": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_subnet": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_templateinput": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_templatekind": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_user": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
+				},
+			},
+			"foreman_usergroup": {
+				// Tok: ForemanDataSource(mainMod, "getEnvironment"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					// HACK: remove this field for now as it breaks dotnet codegen due to our current type naming strategy.
+					// https://github.com/pulumi/pulumi-terraform-bridge/issues/1118
+					"__meta_":  {Omit: true},
+					"__meta__": {Omit: true},
 				},
 			},
 		},

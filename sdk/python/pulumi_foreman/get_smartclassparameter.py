@@ -26,10 +26,7 @@ class GetSmartclassparameterResult:
     """
     A collection of values returned by getSmartclassparameter.
     """
-    def __init__(__self__, __meta_=None, id=None, parameter=None, puppetclass_id=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, id=None, parameter=None, puppetclass_id=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -39,11 +36,6 @@ class GetSmartclassparameterResult:
         if puppetclass_id and not isinstance(puppetclass_id, int):
             raise TypeError("Expected argument 'puppetclass_id' to be a int")
         pulumi.set(__self__, "puppetclass_id", puppetclass_id)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -70,7 +62,6 @@ class AwaitableGetSmartclassparameterResult(GetSmartclassparameterResult):
         if False:
             yield self
         return GetSmartclassparameterResult(
-            __meta_=self.__meta_,
             id=self.id,
             parameter=self.parameter,
             puppetclass_id=self.puppetclass_id)
@@ -89,7 +80,6 @@ def get_smartclassparameter(parameter: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getSmartclassparameter:getSmartclassparameter', __args__, opts=opts, typ=GetSmartclassparameterResult).value
 
     return AwaitableGetSmartclassparameterResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         id=pulumi.get(__ret__, 'id'),
         parameter=pulumi.get(__ret__, 'parameter'),
         puppetclass_id=pulumi.get(__ret__, 'puppetclass_id'))
@@ -105,7 +95,6 @@ def get_smartclassparameter_output(parameter: Optional[pulumi.Input[str]] = None
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getSmartclassparameter:getSmartclassparameter', __args__, opts=opts, typ=GetSmartclassparameterResult)
     return __ret__.apply(lambda __response__: GetSmartclassparameterResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         id=pulumi.get(__response__, 'id'),
         parameter=pulumi.get(__response__, 'parameter'),
         puppetclass_id=pulumi.get(__response__, 'puppetclass_id')))

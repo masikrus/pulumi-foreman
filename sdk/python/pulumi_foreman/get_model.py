@@ -26,10 +26,7 @@ class GetModelResult:
     """
     A collection of values returned by getModel.
     """
-    def __init__(__self__, __meta_=None, hardware_model=None, id=None, info=None, name=None, vendor_class=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, hardware_model=None, id=None, info=None, name=None, vendor_class=None):
         if hardware_model and not isinstance(hardware_model, str):
             raise TypeError("Expected argument 'hardware_model' to be a str")
         pulumi.set(__self__, "hardware_model", hardware_model)
@@ -45,11 +42,6 @@ class GetModelResult:
         if vendor_class and not isinstance(vendor_class, str):
             raise TypeError("Expected argument 'vendor_class' to be a str")
         pulumi.set(__self__, "vendor_class", vendor_class)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="hardwareModel")
@@ -86,7 +78,6 @@ class AwaitableGetModelResult(GetModelResult):
         if False:
             yield self
         return GetModelResult(
-            __meta_=self.__meta_,
             hardware_model=self.hardware_model,
             id=self.id,
             info=self.info,
@@ -105,7 +96,6 @@ def get_model(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getModel:getModel', __args__, opts=opts, typ=GetModelResult).value
 
     return AwaitableGetModelResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         hardware_model=pulumi.get(__ret__, 'hardware_model'),
         id=pulumi.get(__ret__, 'id'),
         info=pulumi.get(__ret__, 'info'),
@@ -121,7 +111,6 @@ def get_model_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getModel:getModel', __args__, opts=opts, typ=GetModelResult)
     return __ret__.apply(lambda __response__: GetModelResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         hardware_model=pulumi.get(__response__, 'hardware_model'),
         id=pulumi.get(__response__, 'id'),
         info=pulumi.get(__response__, 'info'),

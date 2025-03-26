@@ -27,10 +27,7 @@ class GetComputeprofileResult:
     """
     A collection of values returned by getComputeprofile.
     """
-    def __init__(__self__, __meta_=None, compute_attributes=None, id=None, name=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, compute_attributes=None, id=None, name=None):
         if compute_attributes and not isinstance(compute_attributes, list):
             raise TypeError("Expected argument 'compute_attributes' to be a list")
         pulumi.set(__self__, "compute_attributes", compute_attributes)
@@ -40,11 +37,6 @@ class GetComputeprofileResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="computeAttributes")
@@ -71,7 +63,6 @@ class AwaitableGetComputeprofileResult(GetComputeprofileResult):
         if False:
             yield self
         return GetComputeprofileResult(
-            __meta_=self.__meta_,
             compute_attributes=self.compute_attributes,
             id=self.id,
             name=self.name)
@@ -88,7 +79,6 @@ def get_computeprofile(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getComputeprofile:getComputeprofile', __args__, opts=opts, typ=GetComputeprofileResult).value
 
     return AwaitableGetComputeprofileResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         compute_attributes=pulumi.get(__ret__, 'compute_attributes'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'))
@@ -102,7 +92,6 @@ def get_computeprofile_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getComputeprofile:getComputeprofile', __args__, opts=opts, typ=GetComputeprofileResult)
     return __ret__.apply(lambda __response__: GetComputeprofileResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         compute_attributes=pulumi.get(__response__, 'compute_attributes'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name')))

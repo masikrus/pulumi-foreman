@@ -26,10 +26,7 @@ class GetUsergroupResult:
     """
     A collection of values returned by getUsergroup.
     """
-    def __init__(__self__, __meta_=None, admin=None, id=None, name=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, admin=None, id=None, name=None):
         if admin and not isinstance(admin, bool):
             raise TypeError("Expected argument 'admin' to be a bool")
         pulumi.set(__self__, "admin", admin)
@@ -39,11 +36,6 @@ class GetUsergroupResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -70,7 +62,6 @@ class AwaitableGetUsergroupResult(GetUsergroupResult):
         if False:
             yield self
         return GetUsergroupResult(
-            __meta_=self.__meta_,
             admin=self.admin,
             id=self.id,
             name=self.name)
@@ -87,7 +78,6 @@ def get_usergroup(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getUsergroup:getUsergroup', __args__, opts=opts, typ=GetUsergroupResult).value
 
     return AwaitableGetUsergroupResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         admin=pulumi.get(__ret__, 'admin'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'))
@@ -101,7 +91,6 @@ def get_usergroup_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getUsergroup:getUsergroup', __args__, opts=opts, typ=GetUsergroupResult)
     return __ret__.apply(lambda __response__: GetUsergroupResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         admin=pulumi.get(__response__, 'admin'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name')))

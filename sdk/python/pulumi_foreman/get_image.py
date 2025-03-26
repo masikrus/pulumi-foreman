@@ -26,10 +26,7 @@ class GetImageResult:
     """
     A collection of values returned by getImage.
     """
-    def __init__(__self__, __meta_=None, architecture_id=None, compute_resource_id=None, id=None, name=None, operatingsystem_id=None, user_data=None, username=None, uuid=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, architecture_id=None, compute_resource_id=None, id=None, name=None, operatingsystem_id=None, user_data=None, username=None, uuid=None):
         if architecture_id and not isinstance(architecture_id, int):
             raise TypeError("Expected argument 'architecture_id' to be a int")
         pulumi.set(__self__, "architecture_id", architecture_id)
@@ -54,11 +51,6 @@ class GetImageResult:
         if uuid and not isinstance(uuid, str):
             raise TypeError("Expected argument 'uuid' to be a str")
         pulumi.set(__self__, "uuid", uuid)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="architectureId")
@@ -110,7 +102,6 @@ class AwaitableGetImageResult(GetImageResult):
         if False:
             yield self
         return GetImageResult(
-            __meta_=self.__meta_,
             architecture_id=self.architecture_id,
             compute_resource_id=self.compute_resource_id,
             id=self.id,
@@ -134,7 +125,6 @@ def get_image(compute_resource_id: Optional[int] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getImage:getImage', __args__, opts=opts, typ=GetImageResult).value
 
     return AwaitableGetImageResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         architecture_id=pulumi.get(__ret__, 'architecture_id'),
         compute_resource_id=pulumi.get(__ret__, 'compute_resource_id'),
         id=pulumi.get(__ret__, 'id'),
@@ -155,7 +145,6 @@ def get_image_output(compute_resource_id: Optional[pulumi.Input[int]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getImage:getImage', __args__, opts=opts, typ=GetImageResult)
     return __ret__.apply(lambda __response__: GetImageResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         architecture_id=pulumi.get(__response__, 'architecture_id'),
         compute_resource_id=pulumi.get(__response__, 'compute_resource_id'),
         id=pulumi.get(__response__, 'id'),

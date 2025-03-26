@@ -26,10 +26,7 @@ class GetKatelloRepositoryResult:
     """
     A collection of values returned by getKatelloRepository.
     """
-    def __init__(__self__, __meta_=None, ansible_collection_requirements=None, checksum_type=None, content_type=None, deb_architectures=None, deb_components=None, deb_releases=None, description=None, docker_tags_whitelist=None, docker_upstream_name=None, download_concurrency=None, download_policy=None, gpg_key_id=None, http_proxy_id=None, http_proxy_policy=None, id=None, ignorable_content=None, ignore_global_proxy=None, label=None, mirror_on_sync=None, mirroring_policy=None, name=None, product_id=None, unprotected=None, upstream_password=None, upstream_username=None, url=None, verify_ssl_on_sync=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, ansible_collection_requirements=None, checksum_type=None, content_type=None, deb_architectures=None, deb_components=None, deb_releases=None, description=None, docker_tags_whitelist=None, docker_upstream_name=None, download_concurrency=None, download_policy=None, gpg_key_id=None, http_proxy_id=None, http_proxy_policy=None, id=None, ignorable_content=None, ignore_global_proxy=None, label=None, mirror_on_sync=None, mirroring_policy=None, name=None, product_id=None, unprotected=None, upstream_password=None, upstream_username=None, url=None, verify_ssl_on_sync=None):
         if ansible_collection_requirements and not isinstance(ansible_collection_requirements, str):
             raise TypeError("Expected argument 'ansible_collection_requirements' to be a str")
         pulumi.set(__self__, "ansible_collection_requirements", ansible_collection_requirements)
@@ -111,11 +108,6 @@ class GetKatelloRepositoryResult:
         if verify_ssl_on_sync and not isinstance(verify_ssl_on_sync, bool):
             raise TypeError("Expected argument 'verify_ssl_on_sync' to be a bool")
         pulumi.set(__self__, "verify_ssl_on_sync", verify_ssl_on_sync)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="ansibleCollectionRequirements")
@@ -262,7 +254,6 @@ class AwaitableGetKatelloRepositoryResult(GetKatelloRepositoryResult):
         if False:
             yield self
         return GetKatelloRepositoryResult(
-            __meta_=self.__meta_,
             ansible_collection_requirements=self.ansible_collection_requirements,
             checksum_type=self.checksum_type,
             content_type=self.content_type,
@@ -303,7 +294,6 @@ def get_katello_repository(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getKatelloRepository:getKatelloRepository', __args__, opts=opts, typ=GetKatelloRepositoryResult).value
 
     return AwaitableGetKatelloRepositoryResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         ansible_collection_requirements=pulumi.get(__ret__, 'ansible_collection_requirements'),
         checksum_type=pulumi.get(__ret__, 'checksum_type'),
         content_type=pulumi.get(__ret__, 'content_type'),
@@ -341,7 +331,6 @@ def get_katello_repository_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getKatelloRepository:getKatelloRepository', __args__, opts=opts, typ=GetKatelloRepositoryResult)
     return __ret__.apply(lambda __response__: GetKatelloRepositoryResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         ansible_collection_requirements=pulumi.get(__response__, 'ansible_collection_requirements'),
         checksum_type=pulumi.get(__response__, 'checksum_type'),
         content_type=pulumi.get(__response__, 'content_type'),

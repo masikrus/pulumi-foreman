@@ -26,10 +26,7 @@ class GetKatelloSyncPlanResult:
     """
     A collection of values returned by getKatelloSyncPlan.
     """
-    def __init__(__self__, __meta_=None, cron_expression=None, description=None, enabled=None, id=None, interval=None, name=None, sync_date=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, cron_expression=None, description=None, enabled=None, id=None, interval=None, name=None, sync_date=None):
         if cron_expression and not isinstance(cron_expression, str):
             raise TypeError("Expected argument 'cron_expression' to be a str")
         pulumi.set(__self__, "cron_expression", cron_expression)
@@ -51,11 +48,6 @@ class GetKatelloSyncPlanResult:
         if sync_date and not isinstance(sync_date, str):
             raise TypeError("Expected argument 'sync_date' to be a str")
         pulumi.set(__self__, "sync_date", sync_date)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="cronExpression")
@@ -102,7 +94,6 @@ class AwaitableGetKatelloSyncPlanResult(GetKatelloSyncPlanResult):
         if False:
             yield self
         return GetKatelloSyncPlanResult(
-            __meta_=self.__meta_,
             cron_expression=self.cron_expression,
             description=self.description,
             enabled=self.enabled,
@@ -123,7 +114,6 @@ def get_katello_sync_plan(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getKatelloSyncPlan:getKatelloSyncPlan', __args__, opts=opts, typ=GetKatelloSyncPlanResult).value
 
     return AwaitableGetKatelloSyncPlanResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         cron_expression=pulumi.get(__ret__, 'cron_expression'),
         description=pulumi.get(__ret__, 'description'),
         enabled=pulumi.get(__ret__, 'enabled'),
@@ -141,7 +131,6 @@ def get_katello_sync_plan_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getKatelloSyncPlan:getKatelloSyncPlan', __args__, opts=opts, typ=GetKatelloSyncPlanResult)
     return __ret__.apply(lambda __response__: GetKatelloSyncPlanResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         cron_expression=pulumi.get(__response__, 'cron_expression'),
         description=pulumi.get(__response__, 'description'),
         enabled=pulumi.get(__response__, 'enabled'),

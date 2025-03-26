@@ -26,10 +26,7 @@ class GetHttpproxyResult:
     """
     A collection of values returned by getHttpproxy.
     """
-    def __init__(__self__, __meta_=None, id=None, name=None, url=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, id=None, name=None, url=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -39,11 +36,6 @@ class GetHttpproxyResult:
         if url and not isinstance(url, str):
             raise TypeError("Expected argument 'url' to be a str")
         pulumi.set(__self__, "url", url)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -70,7 +62,6 @@ class AwaitableGetHttpproxyResult(GetHttpproxyResult):
         if False:
             yield self
         return GetHttpproxyResult(
-            __meta_=self.__meta_,
             id=self.id,
             name=self.name,
             url=self.url)
@@ -87,7 +78,6 @@ def get_httpproxy(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getHttpproxy:getHttpproxy', __args__, opts=opts, typ=GetHttpproxyResult).value
 
     return AwaitableGetHttpproxyResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         url=pulumi.get(__ret__, 'url'))
@@ -101,7 +91,6 @@ def get_httpproxy_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getHttpproxy:getHttpproxy', __args__, opts=opts, typ=GetHttpproxyResult)
     return __ret__.apply(lambda __response__: GetHttpproxyResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name'),
         url=pulumi.get(__response__, 'url')))

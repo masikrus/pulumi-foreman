@@ -26,10 +26,7 @@ class GetHostgroupResult:
     """
     A collection of values returned by getHostgroup.
     """
-    def __init__(__self__, __meta_=None, architecture_id=None, compute_profile_id=None, compute_resource_id=None, config_group_ids=None, content_source_id=None, content_view_id=None, domain_id=None, environment_id=None, id=None, lifecycle_environment_id=None, medium_id=None, name=None, operatingsystem_id=None, parameters=None, parent_id=None, ptable_id=None, puppet_ca_proxy_id=None, puppet_class_ids=None, puppet_proxy_id=None, pxe_loader=None, realm_id=None, root_password=None, subnet_id=None, title=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, architecture_id=None, compute_profile_id=None, compute_resource_id=None, config_group_ids=None, content_source_id=None, content_view_id=None, domain_id=None, environment_id=None, id=None, lifecycle_environment_id=None, medium_id=None, name=None, operatingsystem_id=None, parameters=None, parent_id=None, ptable_id=None, puppet_ca_proxy_id=None, puppet_class_ids=None, puppet_proxy_id=None, pxe_loader=None, realm_id=None, root_password=None, subnet_id=None, title=None):
         if architecture_id and not isinstance(architecture_id, int):
             raise TypeError("Expected argument 'architecture_id' to be a int")
         pulumi.set(__self__, "architecture_id", architecture_id)
@@ -102,11 +99,6 @@ class GetHostgroupResult:
         if title and not isinstance(title, str):
             raise TypeError("Expected argument 'title' to be a str")
         pulumi.set(__self__, "title", title)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="architectureId")
@@ -238,7 +230,6 @@ class AwaitableGetHostgroupResult(GetHostgroupResult):
         if False:
             yield self
         return GetHostgroupResult(
-            __meta_=self.__meta_,
             architecture_id=self.architecture_id,
             compute_profile_id=self.compute_profile_id,
             compute_resource_id=self.compute_resource_id,
@@ -276,7 +267,6 @@ def get_hostgroup(title: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getHostgroup:getHostgroup', __args__, opts=opts, typ=GetHostgroupResult).value
 
     return AwaitableGetHostgroupResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         architecture_id=pulumi.get(__ret__, 'architecture_id'),
         compute_profile_id=pulumi.get(__ret__, 'compute_profile_id'),
         compute_resource_id=pulumi.get(__ret__, 'compute_resource_id'),
@@ -311,7 +301,6 @@ def get_hostgroup_output(title: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getHostgroup:getHostgroup', __args__, opts=opts, typ=GetHostgroupResult)
     return __ret__.apply(lambda __response__: GetHostgroupResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         architecture_id=pulumi.get(__response__, 'architecture_id'),
         compute_profile_id=pulumi.get(__response__, 'compute_profile_id'),
         compute_resource_id=pulumi.get(__response__, 'compute_resource_id'),

@@ -26,10 +26,7 @@ class GetComputeresourceResult:
     """
     A collection of values returned by getComputeresource.
     """
-    def __init__(__self__, __meta_=None, cachingenabled=None, datacenter=None, description=None, displaytype=None, hypervisor=None, id=None, name=None, password=None, server=None, setconsolepassword=None, url=None, user=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, cachingenabled=None, datacenter=None, description=None, displaytype=None, hypervisor=None, id=None, name=None, password=None, server=None, setconsolepassword=None, url=None, user=None):
         if cachingenabled and not isinstance(cachingenabled, bool):
             raise TypeError("Expected argument 'cachingenabled' to be a bool")
         pulumi.set(__self__, "cachingenabled", cachingenabled)
@@ -66,11 +63,6 @@ class GetComputeresourceResult:
         if user and not isinstance(user, str):
             raise TypeError("Expected argument 'user' to be a str")
         pulumi.set(__self__, "user", user)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -142,7 +134,6 @@ class AwaitableGetComputeresourceResult(GetComputeresourceResult):
         if False:
             yield self
         return GetComputeresourceResult(
-            __meta_=self.__meta_,
             cachingenabled=self.cachingenabled,
             datacenter=self.datacenter,
             description=self.description,
@@ -168,7 +159,6 @@ def get_computeresource(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getComputeresource:getComputeresource', __args__, opts=opts, typ=GetComputeresourceResult).value
 
     return AwaitableGetComputeresourceResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         cachingenabled=pulumi.get(__ret__, 'cachingenabled'),
         datacenter=pulumi.get(__ret__, 'datacenter'),
         description=pulumi.get(__ret__, 'description'),
@@ -191,7 +181,6 @@ def get_computeresource_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getComputeresource:getComputeresource', __args__, opts=opts, typ=GetComputeresourceResult)
     return __ret__.apply(lambda __response__: GetComputeresourceResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         cachingenabled=pulumi.get(__response__, 'cachingenabled'),
         datacenter=pulumi.get(__response__, 'datacenter'),
         description=pulumi.get(__response__, 'description'),

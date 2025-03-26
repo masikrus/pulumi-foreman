@@ -27,10 +27,7 @@ class GetJobtemplateResult:
     """
     A collection of values returned by getJobtemplate.
     """
-    def __init__(__self__, __meta_=None, description=None, description_format=None, id=None, job_category=None, locked=None, name=None, provider_type=None, snippet=None, template=None, template_inputs=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, description=None, description_format=None, id=None, job_category=None, locked=None, name=None, provider_type=None, snippet=None, template=None, template_inputs=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         pulumi.set(__self__, "description", description)
@@ -61,11 +58,6 @@ class GetJobtemplateResult:
         if template_inputs and not isinstance(template_inputs, list):
             raise TypeError("Expected argument 'template_inputs' to be a list")
         pulumi.set(__self__, "template_inputs", template_inputs)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -127,7 +119,6 @@ class AwaitableGetJobtemplateResult(GetJobtemplateResult):
         if False:
             yield self
         return GetJobtemplateResult(
-            __meta_=self.__meta_,
             description=self.description,
             description_format=self.description_format,
             id=self.id,
@@ -151,7 +142,6 @@ def get_jobtemplate(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getJobtemplate:getJobtemplate', __args__, opts=opts, typ=GetJobtemplateResult).value
 
     return AwaitableGetJobtemplateResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         description=pulumi.get(__ret__, 'description'),
         description_format=pulumi.get(__ret__, 'description_format'),
         id=pulumi.get(__ret__, 'id'),
@@ -172,7 +162,6 @@ def get_jobtemplate_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getJobtemplate:getJobtemplate', __args__, opts=opts, typ=GetJobtemplateResult)
     return __ret__.apply(lambda __response__: GetJobtemplateResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         description=pulumi.get(__response__, 'description'),
         description_format=pulumi.get(__response__, 'description_format'),
         id=pulumi.get(__response__, 'id'),

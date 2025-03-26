@@ -26,10 +26,7 @@ class GetUserResult:
     """
     A collection of values returned by getUser.
     """
-    def __init__(__self__, __meta_=None, admin=None, auth_source_id=None, default_location_id=None, default_organization_id=None, description=None, firstname=None, id=None, lastname=None, locale=None, location_ids=None, login=None, mail=None, organization_ids=None, password=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, admin=None, auth_source_id=None, default_location_id=None, default_organization_id=None, description=None, firstname=None, id=None, lastname=None, locale=None, location_ids=None, login=None, mail=None, organization_ids=None, password=None):
         if admin and not isinstance(admin, bool):
             raise TypeError("Expected argument 'admin' to be a bool")
         pulumi.set(__self__, "admin", admin)
@@ -72,11 +69,6 @@ class GetUserResult:
         if password and not isinstance(password, str):
             raise TypeError("Expected argument 'password' to be a str")
         pulumi.set(__self__, "password", password)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter
@@ -158,7 +150,6 @@ class AwaitableGetUserResult(GetUserResult):
         if False:
             yield self
         return GetUserResult(
-            __meta_=self.__meta_,
             admin=self.admin,
             auth_source_id=self.auth_source_id,
             default_location_id=self.default_location_id,
@@ -194,7 +185,6 @@ def get_user(description: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getUser:getUser', __args__, opts=opts, typ=GetUserResult).value
 
     return AwaitableGetUserResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         admin=pulumi.get(__ret__, 'admin'),
         auth_source_id=pulumi.get(__ret__, 'auth_source_id'),
         default_location_id=pulumi.get(__ret__, 'default_location_id'),
@@ -227,7 +217,6 @@ def get_user_output(description: Optional[pulumi.Input[Optional[str]]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getUser:getUser', __args__, opts=opts, typ=GetUserResult)
     return __ret__.apply(lambda __response__: GetUserResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         admin=pulumi.get(__response__, 'admin'),
         auth_source_id=pulumi.get(__response__, 'auth_source_id'),
         default_location_id=pulumi.get(__response__, 'default_location_id'),

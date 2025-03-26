@@ -26,10 +26,7 @@ class GetParameterResult:
     """
     A collection of values returned by getParameter.
     """
-    def __init__(__self__, __meta_=None, domain_id=None, host_id=None, hostgroup_id=None, id=None, name=None, operatingsystem_id=None, subnet_id=None, value=None):
-        if __meta_ and not isinstance(__meta_, bool):
-            raise TypeError("Expected argument '__meta_' to be a bool")
-        pulumi.set(__self__, "__meta_", __meta_)
+    def __init__(__self__, domain_id=None, host_id=None, hostgroup_id=None, id=None, name=None, operatingsystem_id=None, subnet_id=None, value=None):
         if domain_id and not isinstance(domain_id, int):
             raise TypeError("Expected argument 'domain_id' to be a int")
         pulumi.set(__self__, "domain_id", domain_id)
@@ -54,11 +51,6 @@ class GetParameterResult:
         if value and not isinstance(value, str):
             raise TypeError("Expected argument 'value' to be a str")
         pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def __meta_(self) -> bool:
-        return pulumi.get(self, "__meta_")
 
     @property
     @pulumi.getter(name="domainId")
@@ -110,7 +102,6 @@ class AwaitableGetParameterResult(GetParameterResult):
         if False:
             yield self
         return GetParameterResult(
-            __meta_=self.__meta_,
             domain_id=self.domain_id,
             host_id=self.host_id,
             hostgroup_id=self.hostgroup_id,
@@ -132,7 +123,6 @@ def get_parameter(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('foreman:index/getParameter:getParameter', __args__, opts=opts, typ=GetParameterResult).value
 
     return AwaitableGetParameterResult(
-        __meta_=pulumi.get(__ret__, '__meta_'),
         domain_id=pulumi.get(__ret__, 'domain_id'),
         host_id=pulumi.get(__ret__, 'host_id'),
         hostgroup_id=pulumi.get(__ret__, 'hostgroup_id'),
@@ -151,7 +141,6 @@ def get_parameter_output(name: Optional[pulumi.Input[str]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('foreman:index/getParameter:getParameter', __args__, opts=opts, typ=GetParameterResult)
     return __ret__.apply(lambda __response__: GetParameterResult(
-        __meta_=pulumi.get(__response__, '__meta_'),
         domain_id=pulumi.get(__response__, 'domain_id'),
         host_id=pulumi.get(__response__, 'host_id'),
         hostgroup_id=pulumi.get(__response__, 'hostgroup_id'),
