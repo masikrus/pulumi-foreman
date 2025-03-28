@@ -56,7 +56,7 @@ class _ExportableConfig(types.ModuleType):
         The location for all resources requested and created by the providerDefaults to "0". Set organization_id and location_id
         to a value < 0 if you need to disable Locations and Organizations on Foreman older than 1.21
         """
-        return __config__.get_int('locationId')
+        return __config__.get_int('locationId') or _utilities.get_env_int('FOREMAN_LOCATION_ID')
 
     @property
     def organization_id(self) -> Optional[int]:
@@ -64,7 +64,7 @@ class _ExportableConfig(types.ModuleType):
         The organization for all resource requested and created by the Provider Defaults to "0". Set organization_id and
         location_id to a value < 0 if you need to disable Locations and Organizations on Foreman older than 1.21
         """
-        return __config__.get_int('organizationId')
+        return __config__.get_int('organizationId') or _utilities.get_env_int('FOREMAN_ORGANIZATION_ID')
 
     @property
     def provider_logfile(self) -> Optional[str]:

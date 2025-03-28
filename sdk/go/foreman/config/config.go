@@ -52,13 +52,29 @@ func GetClientUsername(ctx *pulumi.Context) string {
 // The location for all resources requested and created by the providerDefaults to "0". Set organizationId and locationId
 // to a value < 0 if you need to disable Locations and Organizations on Foreman older than 1.21
 func GetLocationId(ctx *pulumi.Context) int {
-	return config.GetInt(ctx, "foreman:locationId")
+	v, err := config.TryInt(ctx, "foreman:locationId")
+	if err == nil {
+		return v
+	}
+	var value int
+	if d := internal.GetEnvOrDefault(nil, internal.ParseEnvInt, "FOREMAN_LOCATION_ID"); d != nil {
+		value = d.(int)
+	}
+	return value
 }
 
 // The organization for all resource requested and created by the Provider Defaults to "0". Set organizationId and
 // locationId to a value < 0 if you need to disable Locations and Organizations on Foreman older than 1.21
 func GetOrganizationId(ctx *pulumi.Context) int {
-	return config.GetInt(ctx, "foreman:organizationId")
+	v, err := config.TryInt(ctx, "foreman:organizationId")
+	if err == nil {
+		return v
+	}
+	var value int
+	if d := internal.GetEnvOrDefault(nil, internal.ParseEnvInt, "FOREMAN_ORGANIZATION_ID"); d != nil {
+		value = d.(int)
+	}
+	return value
 }
 func GetProviderLogfile(ctx *pulumi.Context) string {
 	return config.Get(ctx, "foreman:providerLogfile")

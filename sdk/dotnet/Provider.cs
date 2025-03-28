@@ -152,6 +152,8 @@ namespace Pulumi.Foreman
         {
             ClientPassword = Utilities.GetEnv("FOREMAN_CLIENT_PASSWORD");
             ClientUsername = Utilities.GetEnv("FOREMAN_CLIENT_USERNAME");
+            LocationId = Utilities.GetEnvInt32("FOREMAN_LOCATION_ID");
+            OrganizationId = Utilities.GetEnvInt32("FOREMAN_ORGANIZATION_ID");
             ServerHostname = Utilities.GetEnv("FOREMAN_SERVER_HOSTNAME");
             ServerProtocol = Utilities.GetEnv("FOREMAN_PROTOCOL");
         }

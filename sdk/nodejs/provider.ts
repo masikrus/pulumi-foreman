@@ -67,8 +67,8 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["clientPassword"] = (args ? args.clientPassword : undefined) ?? utilities.getEnv("FOREMAN_CLIENT_PASSWORD");
             resourceInputs["clientTlsInsecure"] = pulumi.output(args ? args.clientTlsInsecure : undefined).apply(JSON.stringify);
             resourceInputs["clientUsername"] = (args ? args.clientUsername : undefined) ?? utilities.getEnv("FOREMAN_CLIENT_USERNAME");
-            resourceInputs["locationId"] = pulumi.output(args ? args.locationId : undefined).apply(JSON.stringify);
-            resourceInputs["organizationId"] = pulumi.output(args ? args.organizationId : undefined).apply(JSON.stringify);
+            resourceInputs["locationId"] = pulumi.output((args ? args.locationId : undefined) ?? utilities.getEnvNumber("FOREMAN_LOCATION_ID")).apply(JSON.stringify);
+            resourceInputs["organizationId"] = pulumi.output((args ? args.organizationId : undefined) ?? utilities.getEnvNumber("FOREMAN_ORGANIZATION_ID")).apply(JSON.stringify);
             resourceInputs["providerLogfile"] = args ? args.providerLogfile : undefined;
             resourceInputs["providerLoglevel"] = args ? args.providerLoglevel : undefined;
             resourceInputs["serverHostname"] = (args ? args.serverHostname : undefined) ?? utilities.getEnv("FOREMAN_SERVER_HOSTNAME");

@@ -60,8 +60,12 @@ class ProviderArgs:
             client_username = _utilities.get_env('FOREMAN_CLIENT_USERNAME')
         if client_username is not None:
             pulumi.set(__self__, "client_username", client_username)
+        if location_id is None:
+            location_id = _utilities.get_env_int('FOREMAN_LOCATION_ID')
         if location_id is not None:
             pulumi.set(__self__, "location_id", location_id)
+        if organization_id is None:
+            organization_id = _utilities.get_env_int('FOREMAN_ORGANIZATION_ID')
         if organization_id is not None:
             pulumi.set(__self__, "organization_id", organization_id)
         if provider_logfile is not None:
@@ -297,7 +301,11 @@ class Provider(pulumi.ProviderResource):
             if client_username is None:
                 client_username = _utilities.get_env('FOREMAN_CLIENT_USERNAME')
             __props__.__dict__["client_username"] = client_username
+            if location_id is None:
+                location_id = _utilities.get_env_int('FOREMAN_LOCATION_ID')
             __props__.__dict__["location_id"] = pulumi.Output.from_input(location_id).apply(pulumi.runtime.to_json) if location_id is not None else None
+            if organization_id is None:
+                organization_id = _utilities.get_env_int('FOREMAN_ORGANIZATION_ID')
             __props__.__dict__["organization_id"] = pulumi.Output.from_input(organization_id).apply(pulumi.runtime.to_json) if organization_id is not None else None
             __props__.__dict__["provider_logfile"] = provider_logfile
             __props__.__dict__["provider_loglevel"] = provider_loglevel

@@ -53,6 +53,16 @@ func NewProvider(ctx *pulumi.Context,
 			args.ClientUsername = pulumi.StringPtr(d.(string))
 		}
 	}
+	if args.LocationId == nil {
+		if d := internal.GetEnvOrDefault(nil, internal.ParseEnvInt, "FOREMAN_LOCATION_ID"); d != nil {
+			args.LocationId = pulumi.IntPtr(d.(int))
+		}
+	}
+	if args.OrganizationId == nil {
+		if d := internal.GetEnvOrDefault(nil, internal.ParseEnvInt, "FOREMAN_ORGANIZATION_ID"); d != nil {
+			args.OrganizationId = pulumi.IntPtr(d.(int))
+		}
+	}
 	if args.ServerHostname == nil {
 		if d := internal.GetEnvOrDefault(nil, nil, "FOREMAN_SERVER_HOSTNAME"); d != nil {
 			args.ServerHostname = pulumi.StringPtr(d.(string))

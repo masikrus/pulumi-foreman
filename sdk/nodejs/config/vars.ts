@@ -60,7 +60,7 @@ Object.defineProperty(exports, "clientUsername", {
 export declare const locationId: number | undefined;
 Object.defineProperty(exports, "locationId", {
     get() {
-        return __config.getObject<number>("locationId");
+        return __config.getObject<number>("locationId") ?? utilities.getEnvNumber("FOREMAN_LOCATION_ID");
     },
     enumerable: true,
 });
@@ -72,7 +72,7 @@ Object.defineProperty(exports, "locationId", {
 export declare const organizationId: number | undefined;
 Object.defineProperty(exports, "organizationId", {
     get() {
-        return __config.getObject<number>("organizationId");
+        return __config.getObject<number>("organizationId") ?? utilities.getEnvNumber("FOREMAN_ORGANIZATION_ID");
     },
     enumerable: true,
 });

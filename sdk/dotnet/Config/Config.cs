@@ -74,7 +74,7 @@ namespace Pulumi.Foreman
             set => _clientUsername.Set(value);
         }
 
-        private static readonly __Value<int?> _locationId = new __Value<int?>(() => __config.GetInt32("locationId"));
+        private static readonly __Value<int?> _locationId = new __Value<int?>(() => __config.GetInt32("locationId") ?? Utilities.GetEnvInt32("FOREMAN_LOCATION_ID"));
         /// <summary>
         /// The location for all resources requested and created by the providerDefaults to "0". Set organization_id and location_id
         /// to a value &lt; 0 if you need to disable Locations and Organizations on Foreman older than 1.21
@@ -85,7 +85,7 @@ namespace Pulumi.Foreman
             set => _locationId.Set(value);
         }
 
-        private static readonly __Value<int?> _organizationId = new __Value<int?>(() => __config.GetInt32("organizationId"));
+        private static readonly __Value<int?> _organizationId = new __Value<int?>(() => __config.GetInt32("organizationId") ?? Utilities.GetEnvInt32("FOREMAN_ORGANIZATION_ID"));
         /// <summary>
         /// The organization for all resource requested and created by the Provider Defaults to "0". Set organization_id and
         /// location_id to a value &lt; 0 if you need to disable Locations and Organizations on Foreman older than 1.21
