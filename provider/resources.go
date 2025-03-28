@@ -449,11 +449,22 @@ func Provider() tfbridge.ProviderInfo {
 					EnvVars: []string{"FOREMAN_CLIENT_PASSWORD"},
 				},
 			},
+			"organization_id": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"FOREMAN_ORGANIZATION_ID"},
+				},
+			},
+			"location_id": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"FOREMAN_LOCATION_ID"},
+				},
+			},
 		},
 		// If extra types are needed for configuration, they can be added here.
 		ExtraTypes: map[string]schema.ComplexTypeSpec{},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
+			PackageName:          "@masikrus/foreman",
 			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
