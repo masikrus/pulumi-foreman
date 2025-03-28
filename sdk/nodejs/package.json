@@ -1,5 +1,5 @@
 {
-    "name": "@masikrus/foreman",
+    "name": "pulumi-foreman",
     "version": "1.0.0",
     "description": "A Pulumi package for creating and managing foreman cloud resources.",
     "keywords": [

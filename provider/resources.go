@@ -464,7 +464,7 @@ func Provider() tfbridge.ProviderInfo {
 		ExtraTypes: map[string]schema.ComplexTypeSpec{},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
-			PackageName:          "@masikrus/foreman",
+			PackageName:          "pulumi-foreman",
 			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
