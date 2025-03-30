@@ -45,6 +45,8 @@ type Host struct {
 	ImageId pulumi.IntOutput `pulumi:"imageId"`
 	// Host interface information.
 	InterfacesAttributes HostInterfacesAttributeArrayOutput `pulumi:"interfacesAttributes"`
+	// NAME of the location to assign to the host.
+	LocationName pulumi.StringPtrOutput `pulumi:"locationName"`
 	// Manage power operations, e.g. power on, if host's build flag will be enabled.
 	ManagePowerOperations pulumi.BoolPtrOutput `pulumi:"managePowerOperations"`
 	// Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
@@ -58,6 +60,8 @@ type Host struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the operating system to put on the host.
 	OperatingsystemId pulumi.IntOutput `pulumi:"operatingsystemId"`
+	// NAME of the organization to assign to the host.
+	OrganizationName pulumi.StringPtrOutput `pulumi:"organizationName"`
 	// ID of the user or usergroup that owns the host.
 	OwnerId pulumi.IntOutput `pulumi:"ownerId"`
 	// Owner of the host, must be either User ot Usergroup
@@ -152,6 +156,8 @@ type hostState struct {
 	ImageId *int `pulumi:"imageId"`
 	// Host interface information.
 	InterfacesAttributes []HostInterfacesAttribute `pulumi:"interfacesAttributes"`
+	// NAME of the location to assign to the host.
+	LocationName *string `pulumi:"locationName"`
 	// Manage power operations, e.g. power on, if host's build flag will be enabled.
 	ManagePowerOperations *bool `pulumi:"managePowerOperations"`
 	// Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
@@ -165,6 +171,8 @@ type hostState struct {
 	Name *string `pulumi:"name"`
 	// ID of the operating system to put on the host.
 	OperatingsystemId *int `pulumi:"operatingsystemId"`
+	// NAME of the organization to assign to the host.
+	OrganizationName *string `pulumi:"organizationName"`
 	// ID of the user or usergroup that owns the host.
 	OwnerId *int `pulumi:"ownerId"`
 	// Owner of the host, must be either User ot Usergroup
@@ -223,6 +231,8 @@ type HostState struct {
 	ImageId pulumi.IntPtrInput
 	// Host interface information.
 	InterfacesAttributes HostInterfacesAttributeArrayInput
+	// NAME of the location to assign to the host.
+	LocationName pulumi.StringPtrInput
 	// Manage power operations, e.g. power on, if host's build flag will be enabled.
 	ManagePowerOperations pulumi.BoolPtrInput
 	// Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
@@ -236,6 +246,8 @@ type HostState struct {
 	Name pulumi.StringPtrInput
 	// ID of the operating system to put on the host.
 	OperatingsystemId pulumi.IntPtrInput
+	// NAME of the organization to assign to the host.
+	OrganizationName pulumi.StringPtrInput
 	// ID of the user or usergroup that owns the host.
 	OwnerId pulumi.IntPtrInput
 	// Owner of the host, must be either User ot Usergroup
@@ -292,6 +304,8 @@ type hostArgs struct {
 	ImageId *int `pulumi:"imageId"`
 	// Host interface information.
 	InterfacesAttributes []HostInterfacesAttribute `pulumi:"interfacesAttributes"`
+	// NAME of the location to assign to the host.
+	LocationName *string `pulumi:"locationName"`
 	// Manage power operations, e.g. power on, if host's build flag will be enabled.
 	ManagePowerOperations *bool `pulumi:"managePowerOperations"`
 	// Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
@@ -305,6 +319,8 @@ type hostArgs struct {
 	Name *string `pulumi:"name"`
 	// ID of the operating system to put on the host.
 	OperatingsystemId *int `pulumi:"operatingsystemId"`
+	// NAME of the organization to assign to the host.
+	OrganizationName *string `pulumi:"organizationName"`
 	// ID of the user or usergroup that owns the host.
 	OwnerId *int `pulumi:"ownerId"`
 	// Owner of the host, must be either User ot Usergroup
@@ -356,6 +372,8 @@ type HostArgs struct {
 	ImageId pulumi.IntPtrInput
 	// Host interface information.
 	InterfacesAttributes HostInterfacesAttributeArrayInput
+	// NAME of the location to assign to the host.
+	LocationName pulumi.StringPtrInput
 	// Manage power operations, e.g. power on, if host's build flag will be enabled.
 	ManagePowerOperations pulumi.BoolPtrInput
 	// Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
@@ -369,6 +387,8 @@ type HostArgs struct {
 	Name pulumi.StringPtrInput
 	// ID of the operating system to put on the host.
 	OperatingsystemId pulumi.IntPtrInput
+	// NAME of the organization to assign to the host.
+	OrganizationName pulumi.StringPtrInput
 	// ID of the user or usergroup that owns the host.
 	OwnerId pulumi.IntPtrInput
 	// Owner of the host, must be either User ot Usergroup
@@ -559,6 +579,11 @@ func (o HostOutput) InterfacesAttributes() HostInterfacesAttributeArrayOutput {
 	return o.ApplyT(func(v *Host) HostInterfacesAttributeArrayOutput { return v.InterfacesAttributes }).(HostInterfacesAttributeArrayOutput)
 }
 
+// NAME of the location to assign to the host.
+func (o HostOutput) LocationName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Host) pulumi.StringPtrOutput { return v.LocationName }).(pulumi.StringPtrOutput)
+}
+
 // Manage power operations, e.g. power on, if host's build flag will be enabled.
 func (o HostOutput) ManagePowerOperations() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Host) pulumi.BoolPtrOutput { return v.ManagePowerOperations }).(pulumi.BoolPtrOutput)
@@ -588,6 +613,11 @@ func (o HostOutput) Name() pulumi.StringOutput {
 // ID of the operating system to put on the host.
 func (o HostOutput) OperatingsystemId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Host) pulumi.IntOutput { return v.OperatingsystemId }).(pulumi.IntOutput)
+}
+
+// NAME of the organization to assign to the host.
+func (o HostOutput) OrganizationName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Host) pulumi.StringPtrOutput { return v.OrganizationName }).(pulumi.StringPtrOutput)
 }
 
 // ID of the user or usergroup that owns the host.

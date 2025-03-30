@@ -101,6 +101,12 @@ namespace Pulumi.Foreman
         public Output<ImmutableArray<Outputs.HostInterfacesAttribute>> InterfacesAttributes { get; private set; } = null!;
 
         /// <summary>
+        /// NAME of the location to assign to the host.
+        /// </summary>
+        [Output("locationName")]
+        public Output<string?> LocationName { get; private set; } = null!;
+
+        /// <summary>
         /// Manage power operations, e.g. power on, if host's build flag will be enabled.
         /// </summary>
         [Output("managePowerOperations")]
@@ -136,6 +142,12 @@ namespace Pulumi.Foreman
         /// </summary>
         [Output("operatingsystemId")]
         public Output<int> OperatingsystemId { get; private set; } = null!;
+
+        /// <summary>
+        /// NAME of the organization to assign to the host.
+        /// </summary>
+        [Output("organizationName")]
+        public Output<string?> OrganizationName { get; private set; } = null!;
 
         /// <summary>
         /// ID of the user or usergroup that owns the host.
@@ -342,6 +354,12 @@ namespace Pulumi.Foreman
         }
 
         /// <summary>
+        /// NAME of the location to assign to the host.
+        /// </summary>
+        [Input("locationName")]
+        public Input<string>? LocationName { get; set; }
+
+        /// <summary>
         /// Manage power operations, e.g. power on, if host's build flag will be enabled.
         /// </summary>
         [Input("managePowerOperations")]
@@ -377,6 +395,12 @@ namespace Pulumi.Foreman
         /// </summary>
         [Input("operatingsystemId")]
         public Input<int>? OperatingsystemId { get; set; }
+
+        /// <summary>
+        /// NAME of the organization to assign to the host.
+        /// </summary>
+        [Input("organizationName")]
+        public Input<string>? OrganizationName { get; set; }
 
         /// <summary>
         /// ID of the user or usergroup that owns the host.
@@ -575,6 +599,12 @@ namespace Pulumi.Foreman
         }
 
         /// <summary>
+        /// NAME of the location to assign to the host.
+        /// </summary>
+        [Input("locationName")]
+        public Input<string>? LocationName { get; set; }
+
+        /// <summary>
         /// Manage power operations, e.g. power on, if host's build flag will be enabled.
         /// </summary>
         [Input("managePowerOperations")]
@@ -610,6 +640,12 @@ namespace Pulumi.Foreman
         /// </summary>
         [Input("operatingsystemId")]
         public Input<int>? OperatingsystemId { get; set; }
+
+        /// <summary>
+        /// NAME of the organization to assign to the host.
+        /// </summary>
+        [Input("organizationName")]
+        public Input<string>? OrganizationName { get; set; }
 
         /// <summary>
         /// ID of the user or usergroup that owns the host.

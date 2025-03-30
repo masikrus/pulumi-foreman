@@ -34,12 +34,14 @@ class HostArgs:
                  hostgroup_id: Optional[pulumi.Input[int]] = None,
                  image_id: Optional[pulumi.Input[int]] = None,
                  interfaces_attributes: Optional[pulumi.Input[Sequence[pulumi.Input['HostInterfacesAttributeArgs']]]] = None,
+                 location_name: Optional[pulumi.Input[str]] = None,
                  manage_power_operations: Optional[pulumi.Input[bool]] = None,
                  managed: Optional[pulumi.Input[bool]] = None,
                  medium_id: Optional[pulumi.Input[int]] = None,
                  model_id: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  operatingsystem_id: Optional[pulumi.Input[int]] = None,
+                 organization_name: Optional[pulumi.Input[str]] = None,
                  owner_id: Optional[pulumi.Input[int]] = None,
                  owner_type: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -64,6 +66,7 @@ class HostArgs:
         :param pulumi.Input[int] hostgroup_id: ID of the hostgroup to assign to the host.
         :param pulumi.Input[int] image_id: ID of an image to be used as base for this host when cloning
         :param pulumi.Input[Sequence[pulumi.Input['HostInterfacesAttributeArgs']]] interfaces_attributes: Host interface information.
+        :param pulumi.Input[str] location_name: NAME of the location to assign to the host.
         :param pulumi.Input[bool] manage_power_operations: Manage power operations, e.g. power on, if host's build flag will be enabled.
         :param pulumi.Input[bool] managed: Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
         :param pulumi.Input[int] medium_id: ID of the medium mounted on the host.
@@ -71,6 +74,7 @@ class HostArgs:
         :param pulumi.Input[str] name: Name of this host as stored in Foreman. Can be short name or FQDN, depending on your Foreman settings (especially the
                setting 'append_domain_name_for_hosts').
         :param pulumi.Input[int] operatingsystem_id: ID of the operating system to put on the host.
+        :param pulumi.Input[str] organization_name: NAME of the organization to assign to the host.
         :param pulumi.Input[int] owner_id: ID of the user or usergroup that owns the host.
         :param pulumi.Input[str] owner_type: Owner of the host, must be either User ot Usergroup
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: A map of parameters that will be saved as host parameters in the machine config.
@@ -112,6 +116,8 @@ class HostArgs:
             pulumi.set(__self__, "image_id", image_id)
         if interfaces_attributes is not None:
             pulumi.set(__self__, "interfaces_attributes", interfaces_attributes)
+        if location_name is not None:
+            pulumi.set(__self__, "location_name", location_name)
         if manage_power_operations is not None:
             pulumi.set(__self__, "manage_power_operations", manage_power_operations)
         if managed is not None:
@@ -124,6 +130,8 @@ class HostArgs:
             pulumi.set(__self__, "name", name)
         if operatingsystem_id is not None:
             pulumi.set(__self__, "operatingsystem_id", operatingsystem_id)
+        if organization_name is not None:
+            pulumi.set(__self__, "organization_name", organization_name)
         if owner_id is not None:
             pulumi.set(__self__, "owner_id", owner_id)
         if owner_type is not None:
@@ -297,6 +305,18 @@ class HostArgs:
         pulumi.set(self, "interfaces_attributes", value)
 
     @property
+    @pulumi.getter(name="locationName")
+    def location_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        NAME of the location to assign to the host.
+        """
+        return pulumi.get(self, "location_name")
+
+    @location_name.setter
+    def location_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "location_name", value)
+
+    @property
     @pulumi.getter(name="managePowerOperations")
     def manage_power_operations(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -368,6 +388,18 @@ class HostArgs:
     @operatingsystem_id.setter
     def operatingsystem_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "operatingsystem_id", value)
+
+    @property
+    @pulumi.getter(name="organizationName")
+    def organization_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        NAME of the organization to assign to the host.
+        """
+        return pulumi.get(self, "organization_name")
+
+    @organization_name.setter
+    def organization_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "organization_name", value)
 
     @property
     @pulumi.getter(name="ownerId")
@@ -521,12 +553,14 @@ class _HostState:
                  hostgroup_id: Optional[pulumi.Input[int]] = None,
                  image_id: Optional[pulumi.Input[int]] = None,
                  interfaces_attributes: Optional[pulumi.Input[Sequence[pulumi.Input['HostInterfacesAttributeArgs']]]] = None,
+                 location_name: Optional[pulumi.Input[str]] = None,
                  manage_power_operations: Optional[pulumi.Input[bool]] = None,
                  managed: Optional[pulumi.Input[bool]] = None,
                  medium_id: Optional[pulumi.Input[int]] = None,
                  model_id: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  operatingsystem_id: Optional[pulumi.Input[int]] = None,
+                 organization_name: Optional[pulumi.Input[str]] = None,
                  owner_id: Optional[pulumi.Input[int]] = None,
                  owner_type: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -555,6 +589,7 @@ class _HostState:
         :param pulumi.Input[int] hostgroup_id: ID of the hostgroup to assign to the host.
         :param pulumi.Input[int] image_id: ID of an image to be used as base for this host when cloning
         :param pulumi.Input[Sequence[pulumi.Input['HostInterfacesAttributeArgs']]] interfaces_attributes: Host interface information.
+        :param pulumi.Input[str] location_name: NAME of the location to assign to the host.
         :param pulumi.Input[bool] manage_power_operations: Manage power operations, e.g. power on, if host's build flag will be enabled.
         :param pulumi.Input[bool] managed: Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
         :param pulumi.Input[int] medium_id: ID of the medium mounted on the host.
@@ -562,6 +597,7 @@ class _HostState:
         :param pulumi.Input[str] name: Name of this host as stored in Foreman. Can be short name or FQDN, depending on your Foreman settings (especially the
                setting 'append_domain_name_for_hosts').
         :param pulumi.Input[int] operatingsystem_id: ID of the operating system to put on the host.
+        :param pulumi.Input[str] organization_name: NAME of the organization to assign to the host.
         :param pulumi.Input[int] owner_id: ID of the user or usergroup that owns the host.
         :param pulumi.Input[str] owner_type: Owner of the host, must be either User ot Usergroup
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: A map of parameters that will be saved as host parameters in the machine config.
@@ -610,6 +646,8 @@ class _HostState:
             pulumi.set(__self__, "image_id", image_id)
         if interfaces_attributes is not None:
             pulumi.set(__self__, "interfaces_attributes", interfaces_attributes)
+        if location_name is not None:
+            pulumi.set(__self__, "location_name", location_name)
         if manage_power_operations is not None:
             pulumi.set(__self__, "manage_power_operations", manage_power_operations)
         if managed is not None:
@@ -622,6 +660,8 @@ class _HostState:
             pulumi.set(__self__, "name", name)
         if operatingsystem_id is not None:
             pulumi.set(__self__, "operatingsystem_id", operatingsystem_id)
+        if organization_name is not None:
+            pulumi.set(__self__, "organization_name", organization_name)
         if owner_id is not None:
             pulumi.set(__self__, "owner_id", owner_id)
         if owner_type is not None:
@@ -833,6 +873,18 @@ class _HostState:
         pulumi.set(self, "interfaces_attributes", value)
 
     @property
+    @pulumi.getter(name="locationName")
+    def location_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        NAME of the location to assign to the host.
+        """
+        return pulumi.get(self, "location_name")
+
+    @location_name.setter
+    def location_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "location_name", value)
+
+    @property
     @pulumi.getter(name="managePowerOperations")
     def manage_power_operations(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -904,6 +956,18 @@ class _HostState:
     @operatingsystem_id.setter
     def operatingsystem_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "operatingsystem_id", value)
+
+    @property
+    @pulumi.getter(name="organizationName")
+    def organization_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        NAME of the organization to assign to the host.
+        """
+        return pulumi.get(self, "organization_name")
+
+    @organization_name.setter
+    def organization_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "organization_name", value)
 
     @property
     @pulumi.getter(name="ownerId")
@@ -1068,12 +1132,14 @@ class Host(pulumi.CustomResource):
                  hostgroup_id: Optional[pulumi.Input[int]] = None,
                  image_id: Optional[pulumi.Input[int]] = None,
                  interfaces_attributes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['HostInterfacesAttributeArgs', 'HostInterfacesAttributeArgsDict']]]]] = None,
+                 location_name: Optional[pulumi.Input[str]] = None,
                  manage_power_operations: Optional[pulumi.Input[bool]] = None,
                  managed: Optional[pulumi.Input[bool]] = None,
                  medium_id: Optional[pulumi.Input[int]] = None,
                  model_id: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  operatingsystem_id: Optional[pulumi.Input[int]] = None,
+                 organization_name: Optional[pulumi.Input[str]] = None,
                  owner_id: Optional[pulumi.Input[int]] = None,
                  owner_type: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -1101,6 +1167,7 @@ class Host(pulumi.CustomResource):
         :param pulumi.Input[int] hostgroup_id: ID of the hostgroup to assign to the host.
         :param pulumi.Input[int] image_id: ID of an image to be used as base for this host when cloning
         :param pulumi.Input[Sequence[pulumi.Input[Union['HostInterfacesAttributeArgs', 'HostInterfacesAttributeArgsDict']]]] interfaces_attributes: Host interface information.
+        :param pulumi.Input[str] location_name: NAME of the location to assign to the host.
         :param pulumi.Input[bool] manage_power_operations: Manage power operations, e.g. power on, if host's build flag will be enabled.
         :param pulumi.Input[bool] managed: Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
         :param pulumi.Input[int] medium_id: ID of the medium mounted on the host.
@@ -1108,6 +1175,7 @@ class Host(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of this host as stored in Foreman. Can be short name or FQDN, depending on your Foreman settings (especially the
                setting 'append_domain_name_for_hosts').
         :param pulumi.Input[int] operatingsystem_id: ID of the operating system to put on the host.
+        :param pulumi.Input[str] organization_name: NAME of the organization to assign to the host.
         :param pulumi.Input[int] owner_id: ID of the user or usergroup that owns the host.
         :param pulumi.Input[str] owner_type: Owner of the host, must be either User ot Usergroup
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: A map of parameters that will be saved as host parameters in the machine config.
@@ -1156,12 +1224,14 @@ class Host(pulumi.CustomResource):
                  hostgroup_id: Optional[pulumi.Input[int]] = None,
                  image_id: Optional[pulumi.Input[int]] = None,
                  interfaces_attributes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['HostInterfacesAttributeArgs', 'HostInterfacesAttributeArgsDict']]]]] = None,
+                 location_name: Optional[pulumi.Input[str]] = None,
                  manage_power_operations: Optional[pulumi.Input[bool]] = None,
                  managed: Optional[pulumi.Input[bool]] = None,
                  medium_id: Optional[pulumi.Input[int]] = None,
                  model_id: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  operatingsystem_id: Optional[pulumi.Input[int]] = None,
+                 organization_name: Optional[pulumi.Input[str]] = None,
                  owner_id: Optional[pulumi.Input[int]] = None,
                  owner_type: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -1195,12 +1265,14 @@ class Host(pulumi.CustomResource):
             __props__.__dict__["hostgroup_id"] = hostgroup_id
             __props__.__dict__["image_id"] = image_id
             __props__.__dict__["interfaces_attributes"] = interfaces_attributes
+            __props__.__dict__["location_name"] = location_name
             __props__.__dict__["manage_power_operations"] = manage_power_operations
             __props__.__dict__["managed"] = managed
             __props__.__dict__["medium_id"] = medium_id
             __props__.__dict__["model_id"] = model_id
             __props__.__dict__["name"] = name
             __props__.__dict__["operatingsystem_id"] = operatingsystem_id
+            __props__.__dict__["organization_name"] = organization_name
             __props__.__dict__["owner_id"] = owner_id
             __props__.__dict__["owner_type"] = owner_type
             __props__.__dict__["parameters"] = parameters
@@ -1244,12 +1316,14 @@ class Host(pulumi.CustomResource):
             hostgroup_id: Optional[pulumi.Input[int]] = None,
             image_id: Optional[pulumi.Input[int]] = None,
             interfaces_attributes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['HostInterfacesAttributeArgs', 'HostInterfacesAttributeArgsDict']]]]] = None,
+            location_name: Optional[pulumi.Input[str]] = None,
             manage_power_operations: Optional[pulumi.Input[bool]] = None,
             managed: Optional[pulumi.Input[bool]] = None,
             medium_id: Optional[pulumi.Input[int]] = None,
             model_id: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             operatingsystem_id: Optional[pulumi.Input[int]] = None,
+            organization_name: Optional[pulumi.Input[str]] = None,
             owner_id: Optional[pulumi.Input[int]] = None,
             owner_type: Optional[pulumi.Input[str]] = None,
             parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -1283,6 +1357,7 @@ class Host(pulumi.CustomResource):
         :param pulumi.Input[int] hostgroup_id: ID of the hostgroup to assign to the host.
         :param pulumi.Input[int] image_id: ID of an image to be used as base for this host when cloning
         :param pulumi.Input[Sequence[pulumi.Input[Union['HostInterfacesAttributeArgs', 'HostInterfacesAttributeArgsDict']]]] interfaces_attributes: Host interface information.
+        :param pulumi.Input[str] location_name: NAME of the location to assign to the host.
         :param pulumi.Input[bool] manage_power_operations: Manage power operations, e.g. power on, if host's build flag will be enabled.
         :param pulumi.Input[bool] managed: Whether or not this host is managed by Foreman. Create host only, don't set build status or manage power states.
         :param pulumi.Input[int] medium_id: ID of the medium mounted on the host.
@@ -1290,6 +1365,7 @@ class Host(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of this host as stored in Foreman. Can be short name or FQDN, depending on your Foreman settings (especially the
                setting 'append_domain_name_for_hosts').
         :param pulumi.Input[int] operatingsystem_id: ID of the operating system to put on the host.
+        :param pulumi.Input[str] organization_name: NAME of the organization to assign to the host.
         :param pulumi.Input[int] owner_id: ID of the user or usergroup that owns the host.
         :param pulumi.Input[str] owner_type: Owner of the host, must be either User ot Usergroup
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: A map of parameters that will be saved as host parameters in the machine config.
@@ -1323,12 +1399,14 @@ class Host(pulumi.CustomResource):
         __props__.__dict__["hostgroup_id"] = hostgroup_id
         __props__.__dict__["image_id"] = image_id
         __props__.__dict__["interfaces_attributes"] = interfaces_attributes
+        __props__.__dict__["location_name"] = location_name
         __props__.__dict__["manage_power_operations"] = manage_power_operations
         __props__.__dict__["managed"] = managed
         __props__.__dict__["medium_id"] = medium_id
         __props__.__dict__["model_id"] = model_id
         __props__.__dict__["name"] = name
         __props__.__dict__["operatingsystem_id"] = operatingsystem_id
+        __props__.__dict__["organization_name"] = organization_name
         __props__.__dict__["owner_id"] = owner_id
         __props__.__dict__["owner_type"] = owner_type
         __props__.__dict__["parameters"] = parameters
@@ -1465,6 +1543,14 @@ class Host(pulumi.CustomResource):
         return pulumi.get(self, "interfaces_attributes")
 
     @property
+    @pulumi.getter(name="locationName")
+    def location_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        NAME of the location to assign to the host.
+        """
+        return pulumi.get(self, "location_name")
+
+    @property
     @pulumi.getter(name="managePowerOperations")
     def manage_power_operations(self) -> pulumi.Output[Optional[bool]]:
         """
@@ -1512,6 +1598,14 @@ class Host(pulumi.CustomResource):
         ID of the operating system to put on the host.
         """
         return pulumi.get(self, "operatingsystem_id")
+
+    @property
+    @pulumi.getter(name="organizationName")
+    def organization_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        NAME of the organization to assign to the host.
+        """
+        return pulumi.get(self, "organization_name")
 
     @property
     @pulumi.getter(name="ownerId")

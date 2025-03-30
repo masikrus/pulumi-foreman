@@ -20,7 +20,7 @@ import (
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
 
-	foreman "github.com/terraform-coop/terraform-provider-foreman/foreman" // Import the upstream provider
+	foreman "github.com/masikrus/terraform-provider-foreman/foreman" // Import the upstream provider
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
@@ -96,7 +96,7 @@ func Provider() tfbridge.ProviderInfo {
 		//   After that, you can proceed as normal.
 		//
 		// This is where you give the bridge a handle to the upstream terraform provider. SDKv2
-		// convention is to have a function at "github.com/terraform-coop/terraform-provider-foreman/provider".New
+		// convention is to have a function at "github.com/masikrus/terraform-provider-foreman/provider".New
 		// which takes a version and produces a factory function. The provider you are bridging may
 		// not do that. You will need to find the function (generally called in upstream's main.go)
 		// that produces a:

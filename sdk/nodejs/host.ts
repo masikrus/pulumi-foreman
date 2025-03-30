@@ -94,6 +94,10 @@ export class Host extends pulumi.CustomResource {
      */
     public readonly interfacesAttributes!: pulumi.Output<outputs.HostInterfacesAttribute[]>;
     /**
+     * NAME of the location to assign to the host.
+     */
+    public readonly locationName!: pulumi.Output<string | undefined>;
+    /**
      * Manage power operations, e.g. power on, if host's build flag will be enabled.
      */
     public readonly managePowerOperations!: pulumi.Output<boolean | undefined>;
@@ -118,6 +122,10 @@ export class Host extends pulumi.CustomResource {
      * ID of the operating system to put on the host.
      */
     public readonly operatingsystemId!: pulumi.Output<number>;
+    /**
+     * NAME of the organization to assign to the host.
+     */
+    public readonly organizationName!: pulumi.Output<string | undefined>;
     /**
      * ID of the user or usergroup that owns the host.
      */
@@ -196,12 +204,14 @@ export class Host extends pulumi.CustomResource {
             resourceInputs["hostgroupId"] = state ? state.hostgroupId : undefined;
             resourceInputs["imageId"] = state ? state.imageId : undefined;
             resourceInputs["interfacesAttributes"] = state ? state.interfacesAttributes : undefined;
+            resourceInputs["locationName"] = state ? state.locationName : undefined;
             resourceInputs["managePowerOperations"] = state ? state.managePowerOperations : undefined;
             resourceInputs["managed"] = state ? state.managed : undefined;
             resourceInputs["mediumId"] = state ? state.mediumId : undefined;
             resourceInputs["modelId"] = state ? state.modelId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["operatingsystemId"] = state ? state.operatingsystemId : undefined;
+            resourceInputs["organizationName"] = state ? state.organizationName : undefined;
             resourceInputs["ownerId"] = state ? state.ownerId : undefined;
             resourceInputs["ownerType"] = state ? state.ownerType : undefined;
             resourceInputs["parameters"] = state ? state.parameters : undefined;
@@ -229,12 +239,14 @@ export class Host extends pulumi.CustomResource {
             resourceInputs["hostgroupId"] = args ? args.hostgroupId : undefined;
             resourceInputs["imageId"] = args ? args.imageId : undefined;
             resourceInputs["interfacesAttributes"] = args ? args.interfacesAttributes : undefined;
+            resourceInputs["locationName"] = args ? args.locationName : undefined;
             resourceInputs["managePowerOperations"] = args ? args.managePowerOperations : undefined;
             resourceInputs["managed"] = args ? args.managed : undefined;
             resourceInputs["mediumId"] = args ? args.mediumId : undefined;
             resourceInputs["modelId"] = args ? args.modelId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["operatingsystemId"] = args ? args.operatingsystemId : undefined;
+            resourceInputs["organizationName"] = args ? args.organizationName : undefined;
             resourceInputs["ownerId"] = args ? args.ownerId : undefined;
             resourceInputs["ownerType"] = args ? args.ownerType : undefined;
             resourceInputs["parameters"] = args ? args.parameters : undefined;
@@ -322,6 +334,10 @@ export interface HostState {
      */
     interfacesAttributes?: pulumi.Input<pulumi.Input<inputs.HostInterfacesAttribute>[]>;
     /**
+     * NAME of the location to assign to the host.
+     */
+    locationName?: pulumi.Input<string>;
+    /**
      * Manage power operations, e.g. power on, if host's build flag will be enabled.
      */
     managePowerOperations?: pulumi.Input<boolean>;
@@ -346,6 +362,10 @@ export interface HostState {
      * ID of the operating system to put on the host.
      */
     operatingsystemId?: pulumi.Input<number>;
+    /**
+     * NAME of the organization to assign to the host.
+     */
+    organizationName?: pulumi.Input<string>;
     /**
      * ID of the user or usergroup that owns the host.
      */
@@ -448,6 +468,10 @@ export interface HostArgs {
      */
     interfacesAttributes?: pulumi.Input<pulumi.Input<inputs.HostInterfacesAttribute>[]>;
     /**
+     * NAME of the location to assign to the host.
+     */
+    locationName?: pulumi.Input<string>;
+    /**
      * Manage power operations, e.g. power on, if host's build flag will be enabled.
      */
     managePowerOperations?: pulumi.Input<boolean>;
@@ -472,6 +496,10 @@ export interface HostArgs {
      * ID of the operating system to put on the host.
      */
     operatingsystemId?: pulumi.Input<number>;
+    /**
+     * NAME of the organization to assign to the host.
+     */
+    organizationName?: pulumi.Input<string>;
     /**
      * ID of the user or usergroup that owns the host.
      */

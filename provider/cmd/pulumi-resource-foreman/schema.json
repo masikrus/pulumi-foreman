@@ -29,6 +29,7 @@
             "respectSchemaVersion": true
         },
         "nodejs": {
+            "packageName": "pulumi-foreman",
             "packageDescription": "A Pulumi package for creating and managing foreman cloud resources.",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-foreman)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-foreman` repo](https://github.com/masikrus/pulumi-foreman/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-foreman` repo](https://github.com/terraform-providers/terraform-provider-foreman/issues).",
             "compatibility": "tfbridge20",
@@ -74,11 +75,21 @@
             },
             "locationId": {
                 "type": "integer",
-                "description": "The location for all resources requested and created by the providerDefaults to \"0\". Set organization_id and location_id\nto a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n"
+                "description": "The location for all resources requested and created by the providerDefaults to \"0\". Set organization_id and location_id\nto a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_LOCATION_ID"
+                    ]
+                }
             },
             "organizationId": {
                 "type": "integer",
-                "description": "The organization for all resource requested and created by the Provider Defaults to \"0\". Set organization_id and\nlocation_id to a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n"
+                "description": "The organization for all resource requested and created by the Provider Defaults to \"0\". Set organization_id and\nlocation_id to a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_ORGANIZATION_ID"
+                    ]
+                }
             },
             "providerLogfile": {
                 "type": "string"
@@ -678,11 +689,21 @@
             },
             "locationId": {
                 "type": "integer",
-                "description": "The location for all resources requested and created by the providerDefaults to \"0\". Set organization_id and location_id\nto a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n"
+                "description": "The location for all resources requested and created by the providerDefaults to \"0\". Set organization_id and location_id\nto a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_LOCATION_ID"
+                    ]
+                }
             },
             "organizationId": {
                 "type": "integer",
-                "description": "The organization for all resource requested and created by the Provider Defaults to \"0\". Set organization_id and\nlocation_id to a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n"
+                "description": "The organization for all resource requested and created by the Provider Defaults to \"0\". Set organization_id and\nlocation_id to a value \u003c 0 if you need to disable Locations and Organizations on Foreman older than 1.21\n",
+                "defaultInfo": {
+                    "environment": [
+                        "FOREMAN_ORGANIZATION_ID"
+                    ]
+                }
             },
             "providerLogfile": {
                 "type": "string"
@@ -1275,6 +1296,10 @@
                     },
                     "description": "Host interface information.\n"
                 },
+                "locationName": {
+                    "type": "string",
+                    "description": "NAME of the location to assign to the host.\n"
+                },
                 "managePowerOperations": {
                     "type": "boolean",
                     "description": "Manage power operations, e.g. power on, if host's build flag will be enabled.\n"
@@ -1298,6 +1323,10 @@
                 "operatingsystemId": {
                     "type": "integer",
                     "description": "ID of the operating system to put on the host.\n"
+                },
+                "organizationName": {
+                    "type": "string",
+                    "description": "NAME of the organization to assign to the host.\n"
                 },
                 "ownerId": {
                     "type": "integer",
@@ -1444,6 +1473,10 @@
                     },
                     "description": "Host interface information.\n"
                 },
+                "locationName": {
+                    "type": "string",
+                    "description": "NAME of the location to assign to the host.\n"
+                },
                 "managePowerOperations": {
                     "type": "boolean",
                     "description": "Manage power operations, e.g. power on, if host's build flag will be enabled.\n"
@@ -1470,6 +1503,10 @@
                     "type": "integer",
                     "description": "ID of the operating system to put on the host.\n",
                     "willReplaceOnChanges": true
+                },
+                "organizationName": {
+                    "type": "string",
+                    "description": "NAME of the organization to assign to the host.\n"
                 },
                 "ownerId": {
                     "type": "integer",
@@ -1600,6 +1637,10 @@
                         },
                         "description": "Host interface information.\n"
                     },
+                    "locationName": {
+                        "type": "string",
+                        "description": "NAME of the location to assign to the host.\n"
+                    },
                     "managePowerOperations": {
                         "type": "boolean",
                         "description": "Manage power operations, e.g. power on, if host's build flag will be enabled.\n"
@@ -1626,6 +1667,10 @@
                         "type": "integer",
                         "description": "ID of the operating system to put on the host.\n",
                         "willReplaceOnChanges": true
+                    },
+                    "organizationName": {
+                        "type": "string",
+                        "description": "NAME of the organization to assign to the host.\n"
                     },
                     "ownerId": {
                         "type": "integer",
@@ -4947,9 +4992,6 @@
             "outputs": {
                 "description": "A collection of values returned by getArchitecture.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -4965,7 +5007,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "operatingsystemIds",
                     "id"
@@ -4989,9 +5030,6 @@
             "outputs": {
                 "description": "A collection of values returned by getComputeprofile.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "computeAttributes": {
                         "items": {
                             "$ref": "#/types/foreman:index/getComputeprofileComputeAttribute:getComputeprofileComputeAttribute"
@@ -5007,7 +5045,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "computeAttributes",
                     "name",
                     "id"
@@ -5031,9 +5068,6 @@
             "outputs": {
                 "description": "A collection of values returned by getComputeresource.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "cachingenabled": {
                         "type": "boolean"
                     },
@@ -5073,7 +5107,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "cachingenabled",
                     "datacenter",
                     "description",
@@ -5106,9 +5139,6 @@
             "outputs": {
                 "description": "A collection of values returned by getDefaulttemplate.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -5127,7 +5157,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "operatingsystemId",
                     "provisioningtemplateId",
@@ -5153,9 +5182,6 @@
             "outputs": {
                 "description": "A collection of values returned by getDomain.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "fullname": {
                         "type": "string"
                     },
@@ -5174,7 +5200,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "fullname",
                     "name",
                     "parameters",
@@ -5199,9 +5224,6 @@
             "outputs": {
                 "description": "A collection of values returned by getEnvironment.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -5211,7 +5233,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "id"
                 ],
@@ -5234,9 +5255,6 @@
             "outputs": {
                 "description": "A collection of values returned by getGlobalParameter.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -5249,7 +5267,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "value",
                     "id"
@@ -5273,9 +5290,6 @@
             "outputs": {
                 "description": "A collection of values returned by getHostgroup.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "architectureId": {
                         "type": "integer"
                     },
@@ -5360,7 +5374,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "architectureId",
                     "computeProfileId",
                     "computeResourceId",
@@ -5405,9 +5418,6 @@
             "outputs": {
                 "description": "A collection of values returned by getHttpproxy.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -5420,7 +5430,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "url",
                     "id"
@@ -5448,9 +5457,6 @@
             "outputs": {
                 "description": "A collection of values returned by getImage.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "architectureId": {
                         "type": "integer"
                     },
@@ -5478,7 +5484,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "architectureId",
                     "computeResourceId",
                     "name",
@@ -5507,9 +5512,6 @@
             "outputs": {
                 "description": "A collection of values returned by getJobtemplate.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "description": {
                         "type": "string"
                     },
@@ -5546,7 +5548,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "description",
                     "descriptionFormat",
                     "jobCategory",
@@ -5577,9 +5578,6 @@
             "outputs": {
                 "description": "A collection of values returned by getKatelloContentCredential.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "content": {
                         "type": "string"
                     },
@@ -5592,7 +5590,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "content",
                     "name",
                     "id"
@@ -5616,9 +5613,6 @@
             "outputs": {
                 "description": "A collection of values returned by getKatelloContentView.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "autoPublish": {
                         "type": "boolean"
                     },
@@ -5670,7 +5664,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "autoPublish",
                     "componentIds",
                     "composite",
@@ -5704,9 +5697,6 @@
             "outputs": {
                 "description": "A collection of values returned by getKatelloLifecycleEnvironment.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "description": {
                         "type": "string"
                     },
@@ -5734,7 +5724,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "description",
                     "label",
                     "library",
@@ -5763,9 +5752,6 @@
             "outputs": {
                 "description": "A collection of values returned by getKatelloProduct.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "description": {
                         "type": "string"
                     },
@@ -5796,7 +5782,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "description",
                     "gpgKeyId",
                     "label",
@@ -5826,9 +5811,6 @@
             "outputs": {
                 "description": "A collection of values returned by getKatelloRepository.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "ansibleCollectionRequirements": {
                         "type": "string"
                     },
@@ -5913,7 +5895,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "ansibleCollectionRequirements",
                     "checksumType",
                     "contentType",
@@ -5961,9 +5942,6 @@
             "outputs": {
                 "description": "A collection of values returned by getKatelloSyncPlan.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "cronExpression": {
                         "type": "string"
                     },
@@ -5988,7 +5966,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "cronExpression",
                     "description",
                     "enabled",
@@ -6016,9 +5993,6 @@
             "outputs": {
                 "description": "A collection of values returned by getMedia.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -6040,7 +6014,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "operatingsystemIds",
                     "osFamily",
@@ -6066,9 +6039,6 @@
             "outputs": {
                 "description": "A collection of values returned by getModel.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "hardwareModel": {
                         "type": "string"
                     },
@@ -6087,7 +6057,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "hardwareModel",
                     "info",
                     "name",
@@ -6113,9 +6082,6 @@
             "outputs": {
                 "description": "A collection of values returned by getOperatingsystem.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "architectures": {
                         "items": {
                             "type": "integer"
@@ -6176,7 +6142,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "architectures",
                     "description",
                     "family",
@@ -6211,9 +6176,6 @@
             "outputs": {
                 "description": "A collection of values returned by getParameter.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "domainId": {
                         "type": "integer"
                     },
@@ -6241,7 +6203,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "domainId",
                     "hostId",
                     "hostgroupId",
@@ -6270,9 +6231,6 @@
             "outputs": {
                 "description": "A collection of values returned by getPartitiontable.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "auditComment": {
                         "type": "string"
                     },
@@ -6318,7 +6276,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "auditComment",
                     "description",
                     "hostIds",
@@ -6351,9 +6308,6 @@
             "outputs": {
                 "description": "A collection of values returned by getPolicy.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -6363,7 +6317,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "id"
                 ],
@@ -6386,9 +6339,6 @@
             "outputs": {
                 "description": "A collection of values returned by getProvisioningtemplate.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "auditComment": {
                         "type": "string"
                     },
@@ -6428,7 +6378,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "auditComment",
                     "description",
                     "locked",
@@ -6459,9 +6408,6 @@
             "outputs": {
                 "description": "A collection of values returned by getPuppetclass.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -6471,7 +6417,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "id"
                 ],
@@ -6494,9 +6439,6 @@
             "outputs": {
                 "description": "A collection of values returned by getSetting.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "categoryName": {
                         "type": "string"
                     },
@@ -6524,7 +6466,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "categoryName",
                     "default",
                     "description",
@@ -6557,9 +6498,6 @@
             "outputs": {
                 "description": "A collection of values returned by getSmartclassparameter.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -6572,7 +6510,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "parameter",
                     "puppetclassId",
                     "id"
@@ -6596,9 +6533,6 @@
             "outputs": {
                 "description": "A collection of values returned by getSmartproxy.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "description": "The provider-assigned unique ID for this managed resource.\n",
                         "type": "string"
@@ -6611,7 +6545,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "name",
                     "url",
                     "id"
@@ -6635,9 +6568,6 @@
             "outputs": {
                 "description": "A collection of values returned by getSubnet.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "bmcId": {
                         "type": "integer"
                     },
@@ -6710,7 +6640,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "bmcId",
                     "bootMode",
                     "description",
@@ -6739,9 +6668,6 @@
             "outputs": {
                 "description": "A collection of values returned by getTemplateinput.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "advanced": {
                         "type": "boolean"
                     },
@@ -6789,7 +6715,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "advanced",
                     "default",
                     "description",
@@ -6865,9 +6790,6 @@
             "outputs": {
                 "description": "A collection of values returned by getUser.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "admin": {
                         "type": "boolean"
                     },
@@ -6919,7 +6841,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "admin",
                     "authSourceId",
                     "defaultLocationId",
@@ -6949,9 +6870,6 @@
             "outputs": {
                 "description": "A collection of values returned by getUsergroup.\n",
                 "properties": {
-                    "__meta_": {
-                        "type": "boolean"
-                    },
                     "admin": {
                         "type": "boolean"
                     },
@@ -6964,7 +6882,6 @@
                     }
                 },
                 "required": [
-                    "__meta_",
                     "admin",
                     "name",
                     "id"
