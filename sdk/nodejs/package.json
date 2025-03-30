@@ -1,6 +1,6 @@
 {
     "name": "pulumi-foreman",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A Pulumi package for creating and managing foreman cloud resources.",
     "keywords": [
         "foreman",
@@ -22,6 +22,6 @@
     "pulumi": {
         "resource": true,
         "name": "foreman",
-        "version": "1.0.0"
+        "version": "1.0.1"
     }
 }
