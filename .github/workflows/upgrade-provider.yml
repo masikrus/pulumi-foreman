@@ -53,11 +53,6 @@ jobs:
           git config --global user.name 'bot@pulumi.com'
           git config --global user.email 'bot@pulumi.com'
         shell: bash
-      - name: some tests
-        run: pwd && ls -lah && cat .upgrade-config.yml && echo "$REPO"
-        env:
-          REPO: ${{ github.repository }}
-        shell: bash
       - name: Create issues for new upstream version
         if: inputs.version == ''
         id: upstream_version
